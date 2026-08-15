@@ -3420,6 +3420,59 @@ button{cursor:pointer}
   }
 }
 
+
+/* ===== FINAL TANGO MATCH BACK BUTTON WIDTH ===== */
+
+/* Area folder 単語 dibuat sejajar dengan batas tombol 戻る */
+#learnedScreen .learned-list,
+#learnedScreen .learned-level-group,
+#learnedScreen .learned-level-title,
+#learnedScreen .learned-folder-content,
+#learnedScreen .actions{
+  width:100% !important;
+  max-width:none !important;
+  box-sizing:border-box !important;
+}
+
+#learnedScreen .actions{
+  align-self:stretch !important;
+}
+
+/* Mobile: gunakan seluruh lebar bagian dalam card, sama seperti 戻る */
+@media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen .menu-card{
+    width:min(88vw,410px) !important;
+    max-width:410px !important;
+    padding-left:10px !important;
+    padding-right:10px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-list,
+  body.kanji-data-scroll #learnedScreen .learned-level-group,
+  body.kanji-data-scroll #learnedScreen .learned-level-title,
+  body.kanji-data-scroll #learnedScreen .learned-folder-content,
+  body.kanji-data-scroll #learnedScreen .actions{
+    width:100% !important;
+    max-width:none !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .actions button{
+    width:100% !important;
+    max-width:none !important;
+    box-sizing:border-box !important;
+  }
+}
+
+@media(max-width:390px){
+  body.kanji-data-scroll #learnedScreen .menu-card{
+    width:90vw !important;
+    max-width:360px !important;
+  }
+}
+
 </style>
 </head>
 <body>
