@@ -3526,6 +3526,54 @@ button{cursor:pointer}
   }
 }
 
+
+/* ===== FINAL SMOOTH PAGE TRANSITIONS ===== */
+:root{
+  --page-transition-ms:260ms;
+}
+
+.screen{
+  transition:
+    opacity var(--page-transition-ms) ease,
+    transform var(--page-transition-ms) cubic-bezier(.22,.61,.36,1),
+    filter var(--page-transition-ms) ease !important;
+  will-change:opacity,transform;
+}
+
+.screen.page-enter{
+  opacity:0 !important;
+  transform:translateY(8px) scale(.992) !important;
+  filter:blur(1px);
+}
+
+.screen.page-enter-active{
+  opacity:1 !important;
+  transform:translateY(0) scale(1) !important;
+  filter:blur(0);
+}
+
+.screen.page-exit{
+  opacity:1 !important;
+  transform:translateY(0) scale(1) !important;
+}
+
+.screen.page-exit-active{
+  opacity:0 !important;
+  transform:translateY(-5px) scale(.995) !important;
+}
+
+/* Gameplay masuk sedikit lebih cepat agar tidak mengganggu fokus */
+#gameScreen{
+  transition-duration:220ms !important;
+}
+
+/* Hormati preferensi OS untuk animasi minimal */
+@media(prefers-reduced-motion:reduce){
+  .screen{
+    transition:none !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4443,19 +4491,74 @@ button{cursor:pointer}
   }
 
   function showScreen(id){
-    screens.forEach(s => $(s).classList.toggle("hidden", s!==id));
-    setPageScrollMode(id);
+    const target=$(id);
+    if(!target)return;
 
-    if(id==="homeScreen")updateContinueButton();
-    if(id!=="gameScreen") startMenuMusic();
+    const current=[...document.querySelectorAll(".screen")]
+      .find(el=>!el.classList.contains("hidden") && el!==target);
 
-    syncMobileGameViewport();
-    if(id==="gameScreen"){
-      keepAnswerKeyboard(80);
-      keepAnswerKeyboard(320);
-    }else{
-      document.body.classList.remove("mobile-game-active","keyboard-open");
+    const applyScreenSideEffects=()=>{
+      setPageScrollMode(id);
+
+      if(id==="homeScreen")updateContinueButton();
+      if(id!=="gameScreen")startMenuMusic();
+      if(id==="learnedScreen")renderLearned();
+
+      syncMobileGameViewport();
+
+      if(id==="gameScreen"){
+        keepAnswerKeyboard(80);
+        keepAnswerKeyboard(320);
+      }else{
+        document.body.classList.remove("mobile-game-active","keyboard-open");
+      }
+    };
+
+    const revealTarget=()=>{
+      document.querySelectorAll(".screen").forEach(el=>{
+        if(el!==target){
+          el.classList.add("hidden");
+          el.classList.remove(
+            "page-enter","page-enter-active",
+            "page-exit","page-exit-active"
+          );
+        }
+      });
+
+      target.classList.remove("hidden","page-exit","page-exit-active");
+      target.classList.add("page-enter");
+
+      applyScreenSideEffects();
+
+      requestAnimationFrame(()=>{
+        requestAnimationFrame(()=>{
+          target.classList.add("page-enter-active");
+          target.classList.remove("page-enter");
+
+          window.setTimeout(()=>{
+            target.classList.remove("page-enter-active");
+          },280);
+        });
+      });
+    };
+
+    if(!current){
+      revealTarget();
+      return;
     }
+
+    current.classList.remove("page-enter","page-enter-active");
+    current.classList.add("page-exit");
+
+    requestAnimationFrame(()=>{
+      current.classList.add("page-exit-active");
+    });
+
+    window.setTimeout(()=>{
+      current.classList.add("hidden");
+      current.classList.remove("page-exit","page-exit-active");
+      revealTarget();
+    },170);
   }
 
   document.querySelectorAll("[data-backhome]").forEach(btn=>{
