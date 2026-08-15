@@ -3338,6 +3338,88 @@ button{cursor:pointer}
   }
 }
 
+
+/* ===== FINAL TANGO CENTER ALIGNMENT ===== */
+
+/* PC + umum: card dan isi 単語 benar-benar di tengah */
+#learnedScreen{
+  justify-items:center !important;
+}
+
+#learnedScreen .menu-card{
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+#learnedScreen .learned-list{
+  width:100% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+#learnedScreen .learned-level-group{
+  width:100% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* Mobile: pusatkan card terhadap viewport, bukan terhadap sisa layout */
+@media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen{
+    display:grid !important;
+    place-items:center !important;
+    justify-items:center !important;
+    align-items:center !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .menu-card{
+    margin-left:auto !important;
+    margin-right:auto !important;
+    justify-self:center !important;
+    align-self:center !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-list{
+    width:100% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-level-group,
+  body.kanji-data-scroll #learnedScreen .learned-level-title,
+  body.kanji-data-scroll #learnedScreen .learned-folder-content{
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+}
+
+
+/* ===== FINAL MOBILE TANGO WIDTH ===== */
+@media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen .menu-card{
+    width:min(84vw,390px) !important;
+    max-width:390px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-list,
+  body.kanji-data-scroll #learnedScreen .learned-level-group,
+  body.kanji-data-scroll #learnedScreen .learned-level-title,
+  body.kanji-data-scroll #learnedScreen .learned-folder-content{
+    width:100% !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
+  }
+}
+
+@media(max-width:390px){
+  body.kanji-data-scroll #learnedScreen .menu-card{
+    width:86vw !important;
+    max-width:345px !important;
+  }
+}
+
 </style>
 </head>
 <body>
