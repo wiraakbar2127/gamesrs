@@ -3614,6 +3614,92 @@ button{cursor:pointer}
   }
 }
 
+
+/* ===== NO VOCABULARY DATA POPUP ===== */
+.no-data-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1200;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:rgba(35,57,74,.28);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+}
+
+.no-data-overlay.hidden{
+  display:none !important;
+}
+
+.no-data-card{
+  width:min(360px,90vw);
+  padding:24px 22px 20px;
+  border:2px solid #dceaf5;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 18px 50px rgba(47,86,116,.22);
+  text-align:center;
+  animation:noDataPop .22s cubic-bezier(.2,.8,.2,1);
+}
+
+.no-data-icon{
+  margin:0 0 8px;
+  font-size:50px;
+  line-height:1;
+}
+
+.no-data-title{
+  margin:0 0 7px;
+  color:#e34f5f;
+  font-size:20px;
+  line-height:1.2;
+  font-weight:1000;
+}
+
+.no-data-text{
+  margin:0 auto 16px;
+  color:#56758d;
+  font-size:13px;
+  line-height:1.45;
+  font-weight:800;
+}
+
+.no-data-ok{
+  width:100%;
+  min-height:42px;
+}
+
+@keyframes noDataPop{
+  from{opacity:0;transform:translateY(8px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+@media(max-width:700px){
+  .no-data-card{
+    width:min(82vw,320px);
+    padding:20px 18px 17px;
+    border-radius:19px;
+  }
+
+  .no-data-icon{
+    font-size:44px;
+  }
+
+  .no-data-title{
+    font-size:17px;
+  }
+
+  .no-data-text{
+    font-size:11.5px;
+  }
+
+  .no-data-ok{
+    min-height:38px;
+    font-size:11px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3715,6 +3801,17 @@ button{cursor:pointer}
       </div>
     </div>
   </section>
+
+
+  <!-- NO VOCABULARY DATA POPUP -->
+  <div class="no-data-overlay hidden" id="noDataOverlay">
+    <div class="no-data-card" role="dialog" aria-modal="true" aria-labelledby="noDataTitle">
+      <div class="no-data-icon" aria-hidden="true">❌</div>
+      <div class="no-data-title" id="noDataTitle">データが見つかりません</div>
+      <div class="no-data-text" id="noDataText">このレベルには単語データがありません。</div>
+      <button class="primary no-data-ok" id="noDataOkBtn" type="button">OK</button>
+    </div>
+  </div>
 
   <!-- LEARNED -->
   <section class="screen menu-wrap hidden" id="learnedScreen">
@@ -5049,14 +5146,11 @@ button{cursor:pointer}
   function buildPool(){
     let pool=allData();
     if(settings.jlpt!=="ALL")pool=pool.filter(q=>q.jlpt===settings.jlpt);
-    if(pool.length<3){
-      pool=allData();
-    }
     return shuffle(pool);
   }
   function nextQuestion(){
-    let pool=buildPool();
-    if(!pool.length)pool=allData();
+    const pool=buildPool();
+    if(!pool.length)return null;
 
     const learned=getLearned();
     const now=Date.now();
@@ -5210,6 +5304,14 @@ button{cursor:pointer}
     state.bossActive=false;
 
     currentQ=nextQuestion();
+    if(!currentQ){
+      clearInterval(state.timer);
+      stopMusic();
+      showScreen("setupScreen");
+      showNoDataPopup(settings.jlpt);
+      return;
+    }
+
     state.masteryWrongCounted=false;
     setEnemy();
 
@@ -5363,8 +5465,35 @@ button{cursor:pointer}
     $("endOverlay").classList.remove("hidden");
   }
 
+
+  function hasVocabularyForLevel(level){
+    const data=allData();
+    if(level==="ALL")return data.length>0;
+    return data.some(q=>q.jlpt===level);
+  }
+
+  function showNoDataPopup(level){
+    const label=level==="ALL" ? "全レベル" : level;
+    $("noDataText").textContent=`${label} の単語データがありません。JSONファイルをアップロードしてください。`;
+    $("noDataOverlay").classList.remove("hidden");
+  }
+
+  function closeNoDataPopup(){
+    $("noDataOverlay").classList.add("hidden");
+  }
+
+  $("noDataOkBtn").onclick=closeNoDataPopup;
+  $("noDataOverlay").addEventListener("click",e=>{
+    if(e.target===$("noDataOverlay"))closeNoDataPopup();
+  });
+
   function startGame(){
     settings.jlpt=$("jlpt").value;
+
+    if(!hasVocabularyForLevel(settings.jlpt)){
+      showNoDataPopup(settings.jlpt);
+      return;
+    }
 
     if(isLevelCooldown(settings.jlpt)){
       updateCooldownNotice();
