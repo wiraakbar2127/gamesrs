@@ -3473,6 +3473,59 @@ button{cursor:pointer}
   }
 }
 
+
+
+
+/* ===== FINAL OUTER TANGO CARD NORMAL WIDTH HALF HEIGHT ===== */
+
+/* Lebar card luar 単語 kembali normal */
+#learnedScreen .menu-card{
+  width:min(700px,86vw) !important;
+  max-width:700px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* Isi tetap memenuhi card */
+#learnedScreen .learned-list,
+#learnedScreen .learned-level-group,
+#learnedScreen .learned-level-title,
+#learnedScreen .learned-folder-content,
+#learnedScreen .actions{
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+
+/* Mobile: lebar kembali normal, tinggi sekitar 50% viewport */
+@media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen .menu-card{
+    width:min(88vw,410px) !important;
+    max-width:410px !important;
+    height:50dvh !important;
+    max-height:50dvh !important;
+    min-height:0 !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    overflow:hidden !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-list{
+    flex:1 1 auto !important;
+    min-height:0 !important;
+    overflow-y:auto !important;
+  }
+}
+
+@media(max-width:390px){
+  body.kanji-data-scroll #learnedScreen .menu-card{
+    width:90vw !important;
+    max-width:360px !important;
+    height:50dvh !important;
+    max-height:50dvh !important;
+  }
+}
+
 </style>
 </head>
 <body>
