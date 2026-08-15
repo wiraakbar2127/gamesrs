@@ -3476,44 +3476,87 @@ button{cursor:pointer}
 
 
 
-/* ===== FINAL OUTER TANGO CARD NORMAL WIDTH HALF HEIGHT ===== */
 
-/* Lebar card luar 単語 kembali normal */
+/* ===== FINAL TANGO AUTO HEIGHT + EXPANDABLE FOLDERS ===== */
+
+/* Card 単語 mengikuti tinggi isi folder secara otomatis */
 #learnedScreen .menu-card{
-  width:min(700px,86vw) !important;
-  max-width:700px !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:min(82vh,780px) !important;
+  overflow:hidden !important;
+  display:flex !important;
+  flex-direction:column !important;
 }
 
-/* Isi tetap memenuhi card */
-#learnedScreen .learned-list,
-#learnedScreen .learned-level-group,
-#learnedScreen .learned-level-title,
-#learnedScreen .learned-folder-content,
-#learnedScreen .actions{
+/* Daftar folder tidak dipaksa memenuhi sisa tinggi */
+#learnedScreen .learned-list{
+  flex:0 1 auto !important;
+  min-height:0 !important;
+  height:auto !important;
+  max-height:min(66vh,620px) !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+}
+
+/* Folder tertutup: isi kosakata disembunyikan */
+#learnedScreen .learned-folder-content{
+  display:none !important;
   width:100% !important;
-  max-width:100% !important;
-  box-sizing:border-box !important;
 }
 
-/* Mobile: lebar kembali normal, tinggi sekitar 50% viewport */
+/* Folder dibuka: isi kosakata langsung terlihat */
+#learnedScreen .learned-level-group.open .learned-folder-content{
+  display:grid !important;
+  width:100% !important;
+}
+
+/* Panah ikut berputar saat folder dibuka */
+#learnedScreen .learned-level-group.open .folder-arrow{
+  transform:rotate(90deg);
+}
+
+#learnedScreen .folder-arrow{
+  transition:transform .18s ease;
+}
+
+/* Mobile: tinggi tetap fleksibel mengikuti folder yang terbuka */
 @media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen{
+    height:100dvh !important;
+    min-height:100dvh !important;
+    max-height:100dvh !important;
+    overflow:hidden !important;
+    align-items:center !important;
+  }
+
   body.kanji-data-scroll #learnedScreen .menu-card{
     width:min(88vw,410px) !important;
     max-width:410px !important;
-    height:45dvh !important;
-    max-height:45dvh !important;
+    height:auto !important;
     min-height:0 !important;
-    margin-left:auto !important;
-    margin-right:auto !important;
+    max-height:88dvh !important;
+    margin:auto !important;
     overflow:hidden !important;
+    display:flex !important;
+    flex-direction:column !important;
   }
 
   body.kanji-data-scroll #learnedScreen .learned-list{
-    flex:1 1 auto !important;
+    flex:0 1 auto !important;
     min-height:0 !important;
+    height:auto !important;
+    max-height:calc(88dvh - 112px) !important;
     overflow-y:auto !important;
+    overflow-x:hidden !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-folder-content{
+    display:none !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-level-group.open .learned-folder-content{
+    display:grid !important;
   }
 }
 
@@ -3521,56 +3564,53 @@ button{cursor:pointer}
   body.kanji-data-scroll #learnedScreen .menu-card{
     width:90vw !important;
     max-width:360px !important;
-    height:45dvh !important;
-    max-height:45dvh !important;
+    height:auto !important;
+    max-height:90dvh !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-list{
+    max-height:calc(90dvh - 108px) !important;
   }
 }
 
 
-/* ===== FINAL SMOOTH PAGE TRANSITIONS ===== */
-:root{
-  --page-transition-ms:260ms;
+/* ===== FINAL TANGO TRUE CENTER ===== */
+
+/* Pusatkan halaman 単語 di PC */
+#learnedScreen{
+  display:grid !important;
+  place-items:center !important;
+  justify-items:center !important;
+  align-items:center !important;
 }
 
-.screen{
-  transition:
-    opacity var(--page-transition-ms) ease,
-    transform var(--page-transition-ms) cubic-bezier(.22,.61,.36,1),
-    filter var(--page-transition-ms) ease !important;
-  will-change:opacity,transform;
+#learnedScreen .menu-card{
+  margin:auto !important;
+  justify-self:center !important;
+  align-self:center !important;
 }
 
-.screen.page-enter{
-  opacity:0 !important;
-  transform:translateY(8px) scale(.992) !important;
-  filter:blur(1px);
+/* Pusatkan area daftar di dalam card */
+#learnedScreen .learned-list{
+  margin-left:auto !important;
+  margin-right:auto !important;
 }
 
-.screen.page-enter-active{
-  opacity:1 !important;
-  transform:translateY(0) scale(1) !important;
-  filter:blur(0);
-}
+/* Mobile */
+@media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen{
+    display:grid !important;
+    place-items:center !important;
+    justify-items:center !important;
+    align-items:center !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
+  }
 
-.screen.page-exit{
-  opacity:1 !important;
-  transform:translateY(0) scale(1) !important;
-}
-
-.screen.page-exit-active{
-  opacity:0 !important;
-  transform:translateY(-5px) scale(.995) !important;
-}
-
-/* Gameplay masuk sedikit lebih cepat agar tidak mengganggu fokus */
-#gameScreen{
-  transition-duration:220ms !important;
-}
-
-/* Hormati preferensi OS untuk animasi minimal */
-@media(prefers-reduced-motion:reduce){
-  .screen{
-    transition:none !important;
+  body.kanji-data-scroll #learnedScreen .menu-card{
+    margin:auto !important;
+    justify-self:center !important;
+    align-self:center !important;
   }
 }
 
@@ -3802,66 +3842,31 @@ button{cursor:pointer}
 </div>
 
 <script>
+
+  /* ===== ONE-TIME EMPTY VOCABULARY RESET =====
+     Build ini sengaja dimulai tanpa data kosakata.
+     Reset hanya berjalan sekali, sehingga upload JSON baru setelahnya tetap tersimpan.
+  */
+  (function resetOldVocabularyOnce(){
+    const RESET_KEY="kmr_empty_vocab_reset_v1";
+    if(localStorage.getItem(RESET_KEY))return;
+
+    [
+      "kmr_custom",
+      "kmr_learned",
+      "kmr_game_save",
+      "kmr_game_saves"
+    ].forEach(key=>localStorage.removeItem(key));
+
+    localStorage.setItem(RESET_KEY,"1");
+  })();
+
+
 (() => {
   const $ = id => document.getElementById(id);
   const screens = ["homeScreen","setupScreen","uploadScreen","learnedScreen","gameScreen"];
 
-  const DEFAULT_DATA = [
-    {kanji:"日本",reading:"にほん",meaning:"Jepang",jlpt:"N5"},
-    {kanji:"学校",reading:"がっこう",meaning:"sekolah",jlpt:"N5"},
-    {kanji:"先生",reading:"せんせい",meaning:"guru",jlpt:"N5"},
-    {kanji:"時間",reading:"じかん",meaning:"waktu",jlpt:"N5"},
-    {kanji:"電車",reading:"でんしゃ",meaning:"kereta",jlpt:"N5"},
-    {kanji:"会社",reading:"かいしゃ",meaning:"perusahaan",jlpt:"N5"},
-    {kanji:"勉強",reading:"べんきょう",meaning:"belajar",jlpt:"N5"},
-    {kanji:"食事",reading:"しょくじ",meaning:"makan",jlpt:"N5"},
-    {kanji:"旅行",reading:"りょこう",meaning:"perjalanan",jlpt:"N5"},
-    {kanji:"家族",reading:"かぞく",meaning:"keluarga",jlpt:"N5"},
-
-    {kanji:"予定",reading:"よてい",meaning:"rencana",jlpt:"N4"},
-    {kanji:"必要",reading:"ひつよう",meaning:"perlu",jlpt:"N4"},
-    {kanji:"説明",reading:"せつめい",meaning:"penjelasan",jlpt:"N4"},
-    {kanji:"連絡",reading:"れんらく",meaning:"menghubungi",jlpt:"N4"},
-    {kanji:"準備",reading:"じゅんび",meaning:"persiapan",jlpt:"N4"},
-    {kanji:"約束",reading:"やくそく",meaning:"janji",jlpt:"N4"},
-    {kanji:"利用",reading:"りよう",meaning:"penggunaan",jlpt:"N4"},
-    {kanji:"案内",reading:"あんない",meaning:"panduan",jlpt:"N4"},
-    {kanji:"注意",reading:"ちゅうい",meaning:"perhatian",jlpt:"N4"},
-    {kanji:"習慣",reading:"しゅうかん",meaning:"kebiasaan",jlpt:"N4"},
-
-    {kanji:"改善",reading:"かいぜん",meaning:"perbaikan",jlpt:"N3"},
-    {kanji:"経験",reading:"けいけん",meaning:"pengalaman",jlpt:"N3"},
-    {kanji:"確認",reading:"かくにん",meaning:"konfirmasi",jlpt:"N3"},
-    {kanji:"環境",reading:"かんきょう",meaning:"lingkungan",jlpt:"N3"},
-    {kanji:"状況",reading:"じょうきょう",meaning:"situasi",jlpt:"N3"},
-    {kanji:"影響",reading:"えいきょう",meaning:"pengaruh",jlpt:"N3"},
-    {kanji:"判断",reading:"はんだん",meaning:"penilaian",jlpt:"N3"},
-    {kanji:"責任",reading:"せきにん",meaning:"tanggung jawab",jlpt:"N3"},
-    {kanji:"対策",reading:"たいさく",meaning:"langkah penanganan",jlpt:"N3"},
-    {kanji:"成長",reading:"せいちょう",meaning:"pertumbuhan",jlpt:"N3"},
-
-    {kanji:"継続",reading:"けいぞく",meaning:"kelanjutan",jlpt:"N2"},
-    {kanji:"傾向",reading:"けいこう",meaning:"kecenderungan",jlpt:"N2"},
-    {kanji:"維持",reading:"いじ",meaning:"mempertahankan",jlpt:"N2"},
-    {kanji:"適切",reading:"てきせつ",meaning:"tepat",jlpt:"N2"},
-    {kanji:"促進",reading:"そくしん",meaning:"mendorong",jlpt:"N2"},
-    {kanji:"把握",reading:"はあく",meaning:"memahami",jlpt:"N2"},
-    {kanji:"概要",reading:"がいよう",meaning:"gambaran umum",jlpt:"N2"},
-    {kanji:"妥当",reading:"だとう",meaning:"layak",jlpt:"N2"},
-    {kanji:"著しい",reading:"いちじるしい",meaning:"mencolok",jlpt:"N2"},
-    {kanji:"遂行",reading:"すいこう",meaning:"pelaksanaan",jlpt:"N2"},
-
-    {kanji:"躊躇",reading:"ちゅうちょ",meaning:"ragu-ragu",jlpt:"N1"},
-    {kanji:"曖昧",reading:"あいまい",meaning:"ambigu",jlpt:"N1"},
-    {kanji:"憂鬱",reading:"ゆううつ",meaning:"murung",jlpt:"N1"},
-    {kanji:"臨機応変",reading:"りんきおうへん",meaning:"menyesuaikan dengan keadaan",jlpt:"N1"},
-    {kanji:"試行錯誤",reading:"しこうさくご",meaning:"coba dan salah",jlpt:"N1"},
-    {kanji:"切磋琢磨",reading:"せっさたくま",meaning:"saling memacu untuk berkembang",jlpt:"N1"},
-    {kanji:"顕著",reading:"けんちょ",meaning:"menonjol",jlpt:"N1"},
-    {kanji:"懸念",reading:"けねん",meaning:"kekhawatiran",jlpt:"N1"},
-    {kanji:"踏襲",reading:"とうしゅう",meaning:"mengikuti pola sebelumnya",jlpt:"N1"},
-    {kanji:"網羅",reading:"もうら",meaning:"mencakup seluruhnya",jlpt:"N1"}
-  ];
+  const DEFAULT_DATA = [];
 
   const ENEMY_EMOJIS = [
     "👹","👺","👻","💀","☠️","👿","😈","🤡","👽","🤖",
