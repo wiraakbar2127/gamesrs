@@ -3199,6 +3199,110 @@ button{cursor:pointer}
   }
 }
 
+
+/* ===== FINAL TANGO FOLDER COMFORT SIZE ===== */
+
+/* PC: sedikit lebih besar dan ada jarak tipis antar folder */
+#learnedScreen .learned-list{
+  gap:5px !important;
+  row-gap:5px !important;
+}
+
+#learnedScreen .learned-level-group{
+  margin:0 !important;
+  padding:0 !important;
+}
+
+#learnedScreen .learned-level-title{
+  min-height:40px !important;
+  height:auto !important;
+  padding:8px 12px !important;
+  border-radius:11px !important;
+  font-size:12px !important;
+  line-height:1.1 !important;
+  border:1px solid rgba(116,173,216,.30) !important;
+  box-shadow:0 2px 0 rgba(96,157,211,.08) !important;
+}
+
+#learnedScreen .folder-icon{
+  font-size:15px !important;
+}
+
+#learnedScreen .folder-level-name{
+  font-size:12px !important;
+}
+
+#learnedScreen .folder-memorized{
+  font-size:10px !important;
+}
+
+#learnedScreen .folder-total{
+  font-size:10px !important;
+  padding:3px 7px !important;
+}
+
+#learnedScreen .folder-arrow{
+  font-size:10px !important;
+}
+
+/* Karena sekarang ada jarak, semua folder boleh punya radius penuh */
+#learnedScreen .learned-level-group:first-child .learned-level-title,
+#learnedScreen .learned-level-group:last-child:not(.open) .learned-level-title{
+  border-radius:11px !important;
+}
+
+
+/* Mobile: tetap compact, tetapi sedikit lebih besar dari versi sebelumnya */
+@media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen .learned-list{
+    gap:4px !important;
+    row-gap:4px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-level-title{
+    min-height:38px !important;
+    height:38px !important;
+    padding:6px 9px !important;
+    border-radius:10px !important;
+    font-size:11px !important;
+    line-height:1 !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-left{
+    gap:5px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-icon{
+    font-size:14px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-level-name{
+    font-size:11px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-level-right{
+    gap:5px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-memorized{
+    font-size:9px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-total{
+    min-width:49px !important;
+    padding:3px 6px !important;
+    font-size:9px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-arrow{
+    font-size:9px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-folder-content{
+    margin-top:3px !important;
+  }
+}
+
 </style>
 </head>
 <body>
