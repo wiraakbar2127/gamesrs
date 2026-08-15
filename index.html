@@ -1672,58 +1672,6 @@ button{cursor:pointer}
   transform:translateY(2px) !important;
 }
 
-
-/* ===== SMALL MENU UTILITIES ===== */
-.vertical-menu .menu-utility-row{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-  margin-top:0;
-}
-.vertical-menu .menu-utility-btn{
-  position:static !important;
-  width:54px !important;
-  min-width:54px !important;
-  height:54px !important;
-  min-height:54px !important;
-  padding:0 !important;
-  display:grid !important;
-  place-items:center !important;
-  border:3px solid #77b7e8 !important;
-  border-radius:14px !important;
-  background:linear-gradient(180deg,#ffffff 0%,#edf8ff 100%) !important;
-  color:#4d91c9 !important;
-  font-size:24px !important;
-  line-height:1 !important;
-  box-shadow:
-    0 4px 0 #acd4ee,
-    0 8px 14px rgba(76,141,194,.12) !important;
-  cursor:pointer;
-  transform:none !important;
-}
-.vertical-menu .menu-utility-btn:hover{
-  transform:translateY(-2px) !important;
-  background:linear-gradient(180deg,#ffffff 0%,#e5f5ff 100%) !important;
-}
-.vertical-menu .menu-utility-btn:active{
-  transform:translateY(2px) !important;
-  box-shadow:0 2px 0 #acd4ee !important;
-}
-.vertical-menu .menu-utility-btn.sound-off{
-  opacity:.62 !important;
-}
-@media(max-width:390px){
-  .vertical-menu .menu-utility-btn{
-    width:48px !important;
-    min-width:48px !important;
-    height:48px !important;
-    min-height:48px !important;
-    font-size:21px !important;
-    border-radius:13px !important;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -1741,10 +1689,7 @@ button{cursor:pointer}
         <button class="menu-btn continue-btn" id="goContinue">つづく</button>
         <button class="menu-btn" id="goUpload">アップロード</button>
         <button class="menu-btn" id="goLearned">単語</button>
-        <div class="menu-utility-row">
-          <button class="menu-utility-btn" id="menuSoundBtn" type="button" aria-label="サウンド">🔊</button>
-          <button class="menu-utility-btn" id="menuLangBtn" type="button" aria-label="Bahasa Indonesia">🇮🇩</button>
-        </div>
+        <button class="menu-btn sound-menu-card" id="menuSoundBtn" type="button" aria-label="サウンド">🔊</button>
       </div>
       </div>
     </div>
@@ -2200,7 +2145,7 @@ button{cursor:pointer}
     if(!el)return;
     const level=$("jlpt")?.value || settings.jlpt;
     const remaining=getCooldownRemaining(level);
-    el.textContent=remaining>0 ? tr("cooldownLevel",level,formatCooldown(remaining)) : "";
+    el.textContent=remaining>0 ? `${level} · あと ${formatCooldown(remaining)}` : "";
   }
 
   function updateContinueButton(){
@@ -2210,7 +2155,7 @@ button{cursor:pointer}
 
     const slots=getSavedSlots();
     continueBtn.disabled=slots.length===0;
-    continueBtn.title=slots.length ? tr("continueTip") : tr("noSave");
+    continueBtn.title=slots.length ? "レベルと問題タイプを選んで続ける" : "セーブデータがありません";
 
     /* ゲーム ボタンは常に表示する */
     gameBtn.style.display="";
@@ -2299,7 +2244,7 @@ button{cursor:pointer}
       const qmode=mode==="meaning" ? "意味" : "読みかた";
       const savedAt=save.savedAt ? new Date(save.savedAt) : null;
       const time=savedAt && !Number.isNaN(savedAt.getTime())
-        ? savedAt.toLocaleString(uiLang==="id"?"id-ID":"ja-JP",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"})
+        ? savedAt.toLocaleString("ja-JP",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"})
         : "";
       const remaining=getCooldownRemaining(level);
       const locked=remaining>0;
@@ -2313,9 +2258,9 @@ button{cursor:pointer}
                 data-continue-slot="${key}" ${locked?"disabled":""}>
           <span class="continue-level-name">${level==="ALL"?"ALL":level}</span>
           <span class="continue-level-meta">
-            <span class="continue-vocab-count">${tr("memorized",memorizedCount)}</span>
+            <span class="continue-vocab-count">覚えた単語 ${memorizedCount}語</span>
             <span class="continue-save-time">${time}</span>
-            ${locked?`<div class="continue-level-cooldown">${tr("cooldown",formatCooldown(remaining))}</div>`:""}
+            ${locked?`<div class="continue-level-cooldown">あと ${formatCooldown(remaining)}</div>`:""}
           </span>
           <span class="continue-mode-badge ${badgeClass}">${badge}</span>
         </button>`;
@@ -2377,7 +2322,7 @@ button{cursor:pointer}
     a.remove();
     setTimeout(()=>URL.revokeObjectURL(url),1000);
 
-    showManualSaveStatus(tr("exportDone"));
+    showManualSaveStatus("セーブファイルを書き出しました");
   }
 
   async function importManualSaveFile(file){
@@ -2443,7 +2388,7 @@ button{cursor:pointer}
       }
 
       updateContinueButton();
-      showManualSaveStatus(tr("importDone"));
+      showManualSaveStatus("セーブデータを読み込みました");
 
       /* Jika halaman 単語 sedang terbuka, langsung refresh isi. */
       if(!$("learnedScreen").classList.contains("hidden")){
@@ -2451,7 +2396,7 @@ button{cursor:pointer}
       }
     }catch(err){
       console.error(err);
-      showManualSaveStatus(tr("importFail"),true);
+      showManualSaveStatus("セーブファイルを読み込めません",true);
     }finally{
       $("importSaveFile").value="";
     }
@@ -2499,7 +2444,7 @@ button{cursor:pointer}
 
     currentQ=save.currentQ;
 
-    $("stageName").textContent=`${settings.jlpt} · ${settings.qmode==="reading"?tr("reading"):tr("meaning")} · SRS 35`;
+    $("stageName").textContent=`${settings.jlpt} · ${settings.qmode==="reading"?"読みかた":"意味"} · SRS 35`;
     $("pauseOverlay").classList.add("hidden");
     $("endOverlay").classList.add("hidden");
     $("resultOverlay").classList.add("hidden");
@@ -2510,7 +2455,7 @@ button{cursor:pointer}
 
     setEnemy();
     $("prompt").textContent=currentQ.kanji;
-    $("questionNote").textContent=settings.qmode==="reading" ? tr("readingQuestion") : tr("meaningQuestion");
+    $("questionNote").textContent=settings.qmode==="reading" ? "読み方は？" : "意味は？";
     $("answer").placeholder="Ketik Jawaban";
     $("answer").value="";
     $("answer").disabled=false;
@@ -2524,171 +2469,6 @@ button{cursor:pointer}
     startTimer(true);
   }
 
-  const UI_LANG_KEY="kmr_ui_lang";
-  let uiLang=localStorage.getItem(UI_LANG_KEY)==="id" ? "id" : "ja";
-
-  const UI_TEXT={
-    ja:{
-      game:"ゲーム",continue:"つづく",upload:"アップロード",words:"単語",
-      continueChoose:"レベルを選んでください",
-      questionType:"問題タイプ",reading:"読みかた",meaning:"意味",
-      allLevels:"全レベル",back:"戻る",start:"ゲーム開始",
-      questionUpload:"問題アップロード",chooseQuestionFile:"問題ファイルを選択",
-      questionFileHelp:"JSONファイルはブラウザに保存されます。",
-      save:"セーブ",saveHelp:"別の端末へデータを移すときに使います。",
-      exportSave:"セーブ書き出し",importSave:"セーブ読み込み",
-      resetHistory:"履歴をリセット",resetTitle:"履歴を削除しますか？",
-      resetText:"SRSの進捗とMASTEREDステータスがすべて削除されます。よろしいですか？",
-      cancel:"キャンセル",delete:"削除する",
-      score:"スコア",playerHp:"プレイヤーHP",combo:"コンボ",
-      resultNext:"クリックまたはENTERで次へ",
-      resume:"続ける",soundOn:"サウンド ON",soundOff:"サウンド OFF",
-      restart:"ゲームをやり直す",mainMenu:"メインメニューへ",
-      again:"もう一度",mainMenuShort:"メインメニュー",
-      readingQuestion:"読み方は？",meaningQuestion:"意味は？",
-      mastery:"習得度",correct:"正解",timeUp:"時間切れ",
-      wrongRetry:"ちがいます！もう一度",
-      emptyWords:"まだ単語が記録されていません。",
-      remainingCorrect:n=>`あと${n}回正解`,
-      memorized:n=>`覚えた単語 ${n}語`,
-      cooldown:t=>`あと ${t}`,
-      cooldownLevel:(level,t)=>`${level} · あと ${t}`,
-      savedQuestions:n=>`問題を${n}問保存しました。`,
-      exportDone:"セーブファイルを書き出しました",
-      importDone:"セーブデータを読み込みました",
-      importFail:"セーブファイルを読み込めません",
-      noSave:"セーブデータがありません",
-      continueTip:"レベルと問題タイプを選んで続ける",
-      gameOverCooldown:level=>`${level} は10分間プレイできません。`,
-      languageTarget:"Bahasa Indonesia"
-    },
-    id:{
-      game:"Game",continue:"Lanjut",upload:"Upload",words:"Kosakata",
-      continueChoose:"Pilih level yang ingin dilanjutkan",
-      questionType:"Tipe Soal",reading:"Cara Baca",meaning:"Arti",
-      allLevels:"Semua Level",back:"Kembali",start:"Mulai Game",
-      questionUpload:"Upload Soal",chooseQuestionFile:"Pilih File Soal",
-      questionFileHelp:"File JSON akan disimpan di browser.",
-      save:"Save",saveHelp:"Gunakan untuk memindahkan data ke perangkat lain.",
-      exportSave:"Ekspor Save",importSave:"Impor Save",
-      resetHistory:"Reset Riwayat",resetTitle:"Hapus riwayat?",
-      resetText:"Semua progres SRS dan status MASTERED akan dihapus. Lanjutkan?",
-      cancel:"Batal",delete:"Hapus",
-      score:"Skor",playerHp:"HP Pemain",combo:"Kombo",
-      resultNext:"KLIK AREA INI ATAU TEKAN ENTER UNTUK LANJUT",
-      resume:"Lanjutkan",soundOn:"Suara ON",soundOff:"Suara OFF",
-      restart:"Ulangi Game",mainMenu:"Menu Utama",
-      again:"Main Lagi",mainMenuShort:"Menu Utama",
-      readingQuestion:"Bagaimana cara bacanya?",meaningQuestion:"Apa artinya?",
-      mastery:"Penguasaan",correct:"Benar",timeUp:"Waktu Habis",
-      wrongRetry:"Salah! Coba lagi",
-      emptyWords:"Belum ada kosakata yang tercatat.",
-      remainingCorrect:n=>`Butuh ${n} jawaban benar lagi`,
-      memorized:n=>`Kosakata dipelajari ${n}`,
-      cooldown:t=>`Tunggu ${t}`,
-      cooldownLevel:(level,t)=>`${level} · tunggu ${t}`,
-      savedQuestions:n=>`${n} soal berhasil disimpan.`,
-      exportDone:"File save berhasil diekspor",
-      importDone:"Data save berhasil dimuat",
-      importFail:"File save tidak dapat dibaca",
-      noSave:"Belum ada data save",
-      continueTip:"Pilih level dan tipe soal untuk melanjutkan",
-      gameOverCooldown:level=>`${level} tidak dapat dimainkan selama 10 menit.`,
-      languageTarget:"日本語"
-    }
-  };
-
-  function tr(key,...args){
-    const value=UI_TEXT[uiLang]?.[key] ?? UI_TEXT.ja[key] ?? key;
-    return typeof value==="function" ? value(...args) : value;
-  }
-
-  function setUiText(selector,text){
-    const el=document.querySelector(selector);
-    if(el)el.textContent=text;
-  }
-
-  function applyLanguage(){
-    document.documentElement.lang=uiLang==="id" ? "id" : "ja";
-
-    $("goGame").textContent=tr("game");
-    $("goContinue").textContent=tr("continue");
-    $("goUpload").textContent=tr("upload");
-    $("goLearned").textContent=tr("words");
-
-    setUiText("#continueOverlay .continue-title",tr("continue"));
-    setUiText("#continueOverlay .continue-subtitle",tr("continueChoose"));
-
-    setUiText("#setupScreen .section-title",tr("game"));
-    const setupLabels=document.querySelectorAll("#setupScreen label");
-    if(setupLabels[0])setupLabels[0].textContent=tr("questionType");
-    const readingBtn=document.querySelector('[data-qmode="reading"]');
-    const meaningBtn=document.querySelector('[data-qmode="meaning"]');
-    if(readingBtn)readingBtn.textContent=tr("reading");
-    if(meaningBtn)meaningBtn.textContent=tr("meaning");
-    const allOption=[...$("jlpt").options].find(o=>o.value==="ALL");
-    if(allOption)allOption.textContent=tr("allLevels");
-    $("startGame").textContent=tr("start");
-
-    setUiText("#uploadScreen .section-title",tr("upload"));
-    const uploadTitles=document.querySelectorAll("#uploadScreen .upload-section-title");
-    if(uploadTitles[0])uploadTitles[0].textContent=tr("questionUpload");
-    if(uploadTitles[1])uploadTitles[1].textContent=tr("save");
-    setUiText("#uploadScreen .upload-drop strong",tr("chooseQuestionFile"));
-    setUiText("#uploadScreen .upload-help",tr("questionFileHelp"));
-    setUiText("#uploadScreen .save-help",tr("saveHelp"));
-    $("exportSaveBtn").textContent=tr("exportSave");
-    $("importSaveBtn").textContent=tr("importSave");
-
-    setUiText("#learnedScreen .section-title",tr("words"));
-    $("clearLearned").textContent=tr("resetHistory");
-    setUiText("#confirmResetOverlay .confirm-title",tr("resetTitle"));
-    setUiText("#confirmResetOverlay .confirm-text",tr("resetText"));
-    $("cancelResetBtn").textContent=tr("cancel");
-    $("confirmResetBtn").textContent=tr("delete");
-
-    document.querySelectorAll("[data-backhome]").forEach(btn=>btn.textContent=tr("back"));
-
-    const statLabels=document.querySelectorAll(".monster-hud .stat-label");
-    if(statLabels[0])statLabels[0].textContent=tr("score");
-    if(statLabels[1])statLabels[1].textContent=tr("playerHp");
-    if(statLabels[2])statLabels[2].textContent=tr("combo");
-
-    setUiText(".result-continue",tr("resultNext"));
-    $("resumeBtn").textContent=tr("resume");
-    $("restartBtn").textContent=tr("restart");
-    $("exitBtn").textContent=tr("mainMenu");
-    $("againBtn").textContent=tr("again");
-    $("endHomeBtn").textContent=tr("mainMenuShort");
-
-    if(currentQ){
-      $("questionNote").textContent=settings.qmode==="reading" ? tr("readingQuestion") : tr("meaningQuestion");
-      $("stageName").textContent=`${settings.jlpt} · ${settings.qmode==="reading"?tr("reading"):tr("meaning")} · SRS 35`;
-      updateCurrentMasteryDisplay();
-      if(state.resultOpen){
-        $("resultStatus").textContent=state.resultOutcome==="correct" ? tr("correct") : tr("timeUp");
-      }
-    }
-
-    const langBtn=$("menuLangBtn");
-    if(langBtn){
-      langBtn.textContent=uiLang==="ja" ? "🇮🇩" : "🇯🇵";
-      langBtn.title=tr("languageTarget");
-      langBtn.setAttribute("aria-label",tr("languageTarget"));
-    }
-
-    updateSoundUI();
-    updateContinueButton();
-    if(!$("learnedScreen").classList.contains("hidden"))renderLearned();
-    if(!$("continueOverlay").classList.contains("hidden"))openContinueSelector();
-  }
-
-  function toggleLanguage(){
-    uiLang=uiLang==="ja" ? "id" : "ja";
-    localStorage.setItem(UI_LANG_KEY,uiLang);
-    applyLanguage();
-  }
-
   let audioCtx=null;
   let soundOn=true;
   let musicTimer=null;
@@ -2699,13 +2479,12 @@ button{cursor:pointer}
     if(menuBtn){
       menuBtn.textContent=soundOn?"🔊":"🔇";
       menuBtn.classList.toggle("sound-off",!soundOn);
-      const label=soundOn?tr("soundOn"):tr("soundOff");
-      menuBtn.setAttribute("aria-label",label);
-      menuBtn.title=label;
+      menuBtn.setAttribute("aria-label",soundOn?"サウンド ON":"サウンド OFF");
+      menuBtn.title=soundOn?"サウンド ON":"サウンド OFF";
     }
     const pauseBtn=$("soundToggle");
     if(pauseBtn){
-      pauseBtn.textContent=(soundOn?"🔊 ":"🔇 ")+(soundOn?tr("soundOn"):tr("soundOff"));
+      pauseBtn.textContent=soundOn?"🔊 サウンド ON":"🔇 サウンド OFF";
     }
   }
 
@@ -2744,7 +2523,6 @@ button{cursor:pointer}
   $("goUpload").onclick=()=>showScreen("uploadScreen");
   $("goLearned").onclick=()=>{renderLearned();showScreen("learnedScreen")};
   $("menuSoundBtn").onclick=toggleSound;
-  $("menuLangBtn").onclick=toggleLanguage;
   updateSoundUI();
 
   migrateLegacyGameSave();
@@ -2756,7 +2534,6 @@ button{cursor:pointer}
   });
 
   updateContinueButton();
-  applyLanguage();
 
   $("continueClose").onclick=()=>$("continueOverlay").classList.add("hidden");
   $("continueOverlay").addEventListener("click",e=>{
@@ -2834,7 +2611,7 @@ button{cursor:pointer}
     });
 
     if(!entries.length){
-      list.innerHTML=`<div class="empty">${tr("emptyWords")}</div>`;
+      list.innerHTML='<div class="empty">まだ単語が記録されていません。</div>';
       return;
     }
 
@@ -2899,9 +2676,9 @@ button{cursor:pointer}
     $("learnedDetailKanji").textContent=item.kanji;
     $("learnedDetailReading").textContent=item.reading;
     $("learnedDetailMeaning").textContent=item.meaning;
-    $("learnedProgressLabel").textContent=mastered ? "MASTERED · 35/35" : `${tr("mastery")} ${item.mastery}/35`;
+    $("learnedProgressLabel").textContent=mastered ? "MASTERED · 35/35" : `習得度 ${item.mastery}/35`;
     $("learnedProgressFill").style.width=`${item.mastery/35*100}%`;
-    $("learnedDetailStatus").textContent=mastered ? "MASTERED" : tr("remainingCorrect",35-item.mastery);
+    $("learnedDetailStatus").textContent=mastered ? "MASTERED" : `あと${35-item.mastery}回正解`;
     $("learnedDetailStatus").classList.toggle("mastered",mastered);
     $("learnedDetailOverlay").classList.remove("hidden");
   }
@@ -2929,9 +2706,9 @@ button{cursor:pointer}
         }));
       if(!clean.length)throw new Error("Tidak ada data valid.");
       localStorage.setItem("kmr_custom",JSON.stringify(clean));
-      $("uploadStatus").textContent=tr("savedQuestions",clean.length);
+      $("uploadStatus").textContent=`問題を${clean.length}問保存しました。`;
     }catch(err){
-      $("uploadStatus").textContent=(uiLang==="id"?"Gagal: ":"エラー: ")+err.message;
+      $("uploadStatus").textContent="Gagal: "+err.message;
     }
     e.target.value="";
   });
@@ -3211,11 +2988,11 @@ button{cursor:pointer}
     const mastery=getMastery(currentQ);
     const mastered=mastery>=35;
 
-    $("masteryInfo").textContent=mastered ? "MASTERED" : `${tr("mastery")} ${mastery}/35`;
+    $("masteryInfo").textContent=mastered ? "MASTERED" : `習得度 ${mastery}/35`;
     $("masteryInfo").classList.toggle("mastered",mastered);
 
     if($("resultMastery")){
-      $("resultMastery").textContent=mastered ? "MASTERED · 35/35" : `${tr("mastery")} ${mastery}/35`;
+      $("resultMastery").textContent=mastered ? "MASTERED · 35/35" : `習得度 ${mastery}/35`;
       $("resultMastery").classList.toggle("mastered",mastered);
     }
   }
@@ -3243,7 +3020,7 @@ button{cursor:pointer}
 
     const card=$("resultCard");
     card.className="result-card "+(outcome==="correct"?"correct":"failed");
-    $("resultStatus").textContent=outcome==="correct" ? tr("correct") : tr("timeUp");
+    $("resultStatus").textContent=outcome==="correct" ? "正解" : "時間切れ";
     $("resultKanji").textContent=currentQ.kanji;
     $("resultReading").textContent=currentQ.reading;
     $("resultMeaning").textContent=currentQ.meaning;
@@ -3276,7 +3053,7 @@ button{cursor:pointer}
       if(state.hp<=0){
         startLevelCooldown(settings.jlpt);
         removeCurrentGameSave();
-        finishGame(false,tr("gameOverCooldown",settings.jlpt));
+        finishGame(false,`${settings.jlpt} は10分間プレイできません。`);
       }else{
         loadRound();
       }
@@ -3295,7 +3072,7 @@ button{cursor:pointer}
     setEnemy();
 
     $("prompt").textContent=currentQ.kanji;
-    $("questionNote").textContent=settings.qmode==="reading" ? tr("readingQuestion") : tr("meaningQuestion");
+    $("questionNote").textContent=settings.qmode==="reading" ? "読み方は？" : "意味は？";
     $("answer").placeholder="Ketik Jawaban";
     $("answer").value="";
     $("answer").disabled=false;
@@ -3361,7 +3138,7 @@ button{cursor:pointer}
 
     updateHUD();
     sWrong();
-    showFeedback(tr("wrongRetry"),"warn",500);
+    showFeedback("ちがいます！もう一度","warn",500);
     const shell=$("answerShell");
     shell.classList.remove("input-shake");void shell.offsetWidth;shell.classList.add("input-shake");
     $("answer").value="";
@@ -3457,7 +3234,7 @@ button{cursor:pointer}
       masteryWrongCounted:false
     };
 
-    $("stageName").textContent=`${settings.jlpt} · ${settings.qmode==="reading"?tr("reading"):tr("meaning")} · SRS 35`;
+    $("stageName").textContent=`${settings.jlpt} · ${settings.qmode==="reading"?"読みかた":"意味"} · SRS 35`;
     $("pauseOverlay").classList.add("hidden");
     $("endOverlay").classList.add("hidden");
     $("resultOverlay").classList.add("hidden");
