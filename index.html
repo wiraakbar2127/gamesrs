@@ -1198,6 +1198,532 @@ button{cursor:pointer}
   }
 }
 
+
+.vertical-menu .continue-btn:disabled{
+  opacity:.42;
+  cursor:not-allowed;
+  transform:none !important;
+  filter:grayscale(.15);
+  box-shadow:
+    0 4px 0 #c7d9e5,
+    0 8px 14px rgba(76,141,194,.08),
+    inset 0 2px 0 rgba(255,255,255,.96) !important;
+}
+
+
+/* ===== MANUAL SAVE ===== */
+.manual-save-row{
+  width:min(390px,90%);
+  margin:16px auto 0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.manual-save-btn{
+  min-height:46px;
+  padding:10px 12px;
+  border:2px solid #8fc4ea;
+  border-radius:16px;
+  background:#ffffff;
+  color:#4d91c9;
+  font-family:ui-rounded,"Hiragino Maru Gothic ProN","Arial Rounded MT Bold","Yu Gothic",system-ui,sans-serif;
+  font-size:14px;
+  font-weight:950;
+  box-shadow:
+    0 4px 0 #b8d9ee,
+    0 8px 13px rgba(76,141,194,.10);
+  transition:.15s transform,.15s box-shadow,.15s background;
+}
+
+.manual-save-btn:hover{
+  transform:translateY(-2px);
+  background:#f7fcff;
+  box-shadow:
+    0 6px 0 #b2d5ec,
+    0 11px 16px rgba(76,141,194,.12);
+}
+
+.manual-save-btn:active{
+  transform:translateY(2px);
+  box-shadow:0 2px 0 #b2d5ec;
+}
+
+.manual-save-status{
+  min-height:20px;
+  margin-top:9px;
+  text-align:center;
+  color:#6d91ac;
+  font-size:12px;
+  font-weight:800;
+}
+
+@media(max-width:390px){
+  .manual-save-row{
+    width:min(330px,94%);
+    gap:8px;
+  }
+  .manual-save-btn{
+    min-height:44px;
+    padding:9px 8px;
+    font-size:12px;
+  }
+}
+
+
+/* ===== UPLOAD & SAVE SECTIONS ===== */
+.upload-menu-card{
+  width:min(560px,100%);
+}
+.upload-section{
+  padding:4px 0;
+}
+.upload-section-title{
+  margin:0 0 12px;
+  color:#4d91c9;
+  font-size:18px;
+  font-weight:1000;
+  letter-spacing:.04em;
+}
+.upload-help,
+.save-help{
+  margin-top:6px;
+  color:#7895ad;
+  font-size:12px;
+  line-height:1.45;
+}
+.upload-status{
+  min-height:18px;
+  margin:8px 0 0;
+  color:var(--muted);
+  font-size:12px;
+  text-align:center;
+}
+.upload-divider{
+  height:2px;
+  margin:20px 0;
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,#b9daf1 15%,#b9daf1 85%,transparent);
+}
+.upload-section .manual-save-row{
+  width:100%;
+  margin:12px auto 0;
+}
+
+
+
+/* ===== MULTI SAVE / CONTINUE ===== */
+#goContinue{
+  background:linear-gradient(180deg,#23548a 0%,#173d69 100%) !important;
+  color:#ffffff !important;
+  border:2px solid #2d6095 !important;
+  -webkit-text-stroke:0 !important;
+  text-shadow:none !important;
+  box-shadow:
+    0 6px 0 #0f3158,
+    0 11px 18px rgba(28,67,105,.20) !important;
+}
+#goContinue:hover{
+  background:linear-gradient(180deg,#2b6199 0%,#1b4777 100%) !important;
+  border-color:#3975ad !important;
+}
+#goContinue:disabled{
+  opacity:.38;
+  color:#ffffff !important;
+}
+
+.continue-overlay{
+  position:fixed;
+  inset:0;
+  z-index:130;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:rgba(103,159,204,.38);
+  backdrop-filter:blur(7px);
+}
+.continue-overlay.hidden{display:none}
+.continue-card{
+  position:relative;
+  width:min(430px,94vw);
+  padding:25px 22px 22px;
+  border-radius:26px;
+  background:#fff;
+  border:3px solid #91c4ed;
+  box-shadow:
+    0 12px 0 rgba(91,155,210,.11),
+    0 25px 45px rgba(65,128,181,.20);
+}
+.continue-close{
+  position:absolute;
+  top:11px;
+  right:12px;
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:50%;
+  background:#e7f5ff;
+  color:#5d8fb5;
+  font-size:23px;
+  font-weight:900;
+  line-height:1;
+}
+.continue-title{
+  text-align:center;
+  color:#245486;
+  font-size:27px;
+  font-weight:1000;
+}
+.continue-subtitle{
+  margin-top:5px;
+  text-align:center;
+  color:#7894aa;
+  font-size:12px;
+}
+.continue-level-list{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+}
+.continue-level-btn{
+  width:100%;
+  min-height:61px;
+  display:grid;
+  grid-template-columns:65px 1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:10px 13px;
+  border:2px solid #b2d4ee;
+  border-radius:17px;
+  background:linear-gradient(180deg,#fff,#eff8ff);
+  color:#4e7ea5;
+  text-align:left;
+  box-shadow:0 4px 0 rgba(107,166,214,.13);
+}
+.continue-level-btn:hover{
+  transform:translateY(-2px);
+  border-color:#83bce8;
+}
+.continue-level-name{
+  color:#285b8d;
+  font-size:22px;
+  font-weight:1000;
+}
+.continue-level-meta{
+  color:#7390a7;
+  font-size:11px;
+  line-height:1.45;
+}
+.continue-level-score{
+  color:#4d91c9;
+  font-size:13px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+
+/* ===== SLOT SAVE + COOLDOWN ===== */
+.continue-level-btn{
+  grid-template-columns:68px 1fr !important;
+}
+.continue-level-score{display:none !important}
+.continue-level-btn.cooldown{
+  opacity:.52;
+  cursor:not-allowed;
+  filter:grayscale(.12);
+}
+.continue-level-cooldown{
+  margin-top:2px;
+  color:#d46a78;
+  font-size:11px;
+  font-weight:950;
+}
+.cooldown-notice{
+  min-height:18px;
+  margin-top:8px;
+  color:#d36a78;
+  font-size:12px;
+  font-weight:900;
+  text-align:center;
+}
+
+
+/* ===== CONTINUE MODE BADGE ===== */
+.continue-level-btn{
+  grid-template-columns:58px 58px 1fr !important;
+  gap:10px !important;
+}
+.continue-mode-badge{
+  width:46px;
+  height:46px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:linear-gradient(180deg,#2b6098,#1c4675);
+  color:#fff;
+  font-family:"Hiragino Maru Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  font-size:25px;
+  font-weight:1000;
+  box-shadow:
+    0 4px 0 #15385f,
+    0 7px 11px rgba(25,63,102,.18);
+}
+.continue-mode-badge.meaning{
+  background:linear-gradient(180deg,#7c68c7,#5e4aa5);
+  box-shadow:
+    0 4px 0 #493889,
+    0 7px 11px rgba(74,55,137,.18);
+}
+.continue-mode-name{
+  display:block;
+  color:#315f88;
+  font-size:14px;
+  font-weight:1000;
+  margin-bottom:3px;
+}
+.continue-vocab-count{
+  display:block;
+  color:#5c91b8;
+  font-size:11px;
+  font-weight:950;
+  margin-bottom:2px;
+}
+.continue-save-time{
+  display:block;
+  color:#8298aa;
+  font-size:10px;
+  font-weight:700;
+}
+@media(max-width:390px){
+  .continue-level-btn{
+    grid-template-columns:50px 50px 1fr !important;
+    gap:8px !important;
+  }
+  .continue-mode-badge{
+    width:42px;
+    height:42px;
+    font-size:22px;
+  }
+}
+
+
+/* ===== FINAL CONTINUE + SOUND UI ===== */
+
+/* つづく: softer navy, white border */
+#goContinue{
+  background:linear-gradient(180deg,#547faa 0%,#456f9c 100%) !important;
+  color:#ffffff !important;
+  border:3px solid #ffffff !important;
+  text-shadow:none !important;
+  -webkit-text-stroke:0 !important;
+  box-shadow:
+    0 5px 0 #365e89,
+    0 10px 18px rgba(52,91,132,.16) !important;
+}
+#goContinue:hover{
+  background:linear-gradient(180deg,#608bb4 0%,#507aa5 100%) !important;
+  border-color:#ffffff !important;
+}
+#goContinue:disabled{
+  opacity:.42;
+  color:#ffffff !important;
+  border-color:#ffffff !important;
+}
+
+/* Continue save rows:
+   level left, save info center, small mode kanji at far right */
+.continue-level-btn{
+  grid-template-columns:58px 1fr 28px !important;
+  gap:9px !important;
+}
+.continue-mode-badge{
+  width:auto !important;
+  height:auto !important;
+  display:block !important;
+  place-items:unset !important;
+  justify-self:end;
+  align-self:center;
+  border:0 !important;
+  border-radius:0 !important;
+  background:none !important;
+  box-shadow:none !important;
+  padding:0 !important;
+  font-size:19px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+}
+.continue-mode-badge.reading{
+  color:#4f91c5 !important;
+}
+.continue-mode-badge.meaning{
+  color:#74b75c !important;
+}
+.continue-mode-name{
+  display:none !important;
+}
+.continue-vocab-count{
+  margin-bottom:3px !important;
+}
+@media(max-width:390px){
+  .continue-level-btn{
+    grid-template-columns:48px 1fr 24px !important;
+    gap:7px !important;
+  }
+  .continue-mode-badge{
+    font-size:17px !important;
+  }
+}
+
+/* ===== FINAL TSUZUKU REFINEMENT ===== */
+
+/* つづく kembali ke biru pastel tema utama, dengan gradient halus */
+#goContinue{
+  background:linear-gradient(180deg,#8cc8f0 0%,#69afe0 52%,#5da4d7 100%) !important;
+  color:#ffffff !important;
+  border:3px solid #ffffff !important;
+  text-shadow:
+    0 1px 0 rgba(43,111,160,.22) !important;
+  -webkit-text-stroke:0 !important;
+  box-shadow:
+    0 5px 0 #8fc3e5,
+    0 10px 18px rgba(74,145,195,.16),
+    inset 0 2px 0 rgba(255,255,255,.38) !important;
+}
+#goContinue:hover{
+  background:linear-gradient(180deg,#9bd2f4 0%,#78bae6 52%,#67acdc 100%) !important;
+  border-color:#ffffff !important;
+}
+#goContinue:disabled{
+  opacity:.42;
+  color:#ffffff !important;
+  border-color:#ffffff !important;
+}
+
+/* Save row:
+   level di kiri, info hafalan + tanggal di samping level,
+   badge 読/意 sendirian di ujung kanan */
+.continue-level-btn{
+  grid-template-columns:58px minmax(0,1fr) 26px !important;
+  gap:9px !important;
+  align-items:center !important;
+}
+.continue-level-name{
+  align-self:center;
+}
+.continue-level-meta{
+  min-width:0;
+  justify-self:stretch;
+  text-align:left !important;
+}
+.continue-vocab-count,
+.continue-save-time{
+  text-align:left !important;
+}
+.continue-mode-badge{
+  justify-self:end !important;
+  align-self:center !important;
+}
+
+@media(max-width:390px){
+  .continue-level-btn{
+    grid-template-columns:48px minmax(0,1fr) 22px !important;
+    gap:7px !important;
+  }
+}
+
+
+/* ===== FINAL MENU COLOR + SOUND CARD ===== */
+
+/* つづく sama dengan tombol 続ける di Pause */
+#goContinue{
+  background:linear-gradient(180deg,#72c3ff,#4e99dc) !important;
+  color:white !important;
+  border:2px solid #5a9ed8 !important;
+  box-shadow:0 5px 0 #3d80bb !important;
+  text-shadow:none !important;
+  -webkit-text-stroke:0 !important;
+}
+#goContinue:hover{
+  filter:brightness(1.04);
+}
+
+/* Sound sekarang menjadi card biasa di bawah 単語 */
+.vertical-menu .sound-menu-card{
+  position:static !important;
+  width:100% !important;
+  height:auto !important;
+  min-height:60px !important;
+  border-radius:18px !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:8px 12px !important;
+  font-size:24px !important;
+  line-height:1 !important;
+  opacity:1 !important;
+  transform:none !important;
+}
+.vertical-menu .sound-menu-card.sound-off{
+  opacity:.62 !important;
+}
+.vertical-menu .sound-menu-card:hover{
+  transform:translateY(-2px) !important;
+}
+.vertical-menu .sound-menu-card:active{
+  transform:translateY(2px) !important;
+}
+
+
+/* ===== SMALL MENU UTILITIES ===== */
+.vertical-menu .menu-utility-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin-top:0;
+}
+.vertical-menu .menu-utility-btn{
+  position:static !important;
+  width:54px !important;
+  min-width:54px !important;
+  height:54px !important;
+  min-height:54px !important;
+  padding:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  border:3px solid #77b7e8 !important;
+  border-radius:14px !important;
+  background:linear-gradient(180deg,#ffffff 0%,#edf8ff 100%) !important;
+  color:#4d91c9 !important;
+  font-size:24px !important;
+  line-height:1 !important;
+  box-shadow:
+    0 4px 0 #acd4ee,
+    0 8px 14px rgba(76,141,194,.12) !important;
+  cursor:pointer;
+  transform:none !important;
+}
+.vertical-menu .menu-utility-btn:hover{
+  transform:translateY(-2px) !important;
+  background:linear-gradient(180deg,#ffffff 0%,#e5f5ff 100%) !important;
+}
+.vertical-menu .menu-utility-btn:active{
+  transform:translateY(2px) !important;
+  box-shadow:0 2px 0 #acd4ee !important;
+}
+.vertical-menu .menu-utility-btn.sound-off{
+  opacity:.62 !important;
+}
+@media(max-width:390px){
+  .vertical-menu .menu-utility-btn{
+    width:48px !important;
+    min-width:48px !important;
+    height:48px !important;
+    min-height:48px !important;
+    font-size:21px !important;
+    border-radius:13px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1211,13 +1737,27 @@ button{cursor:pointer}
       </div>
       <div class="card menu-card home-menu-card">
         <div class="main-menu vertical-menu">
-        <button class="menu-btn wood-plank" id="goGame">ゲーム</button>
-        <button class="menu-btn wood-plank" id="goUpload">アップロード</button>
-        <button class="menu-btn wood-plank" id="goLearned">単語</button>
+        <button class="menu-btn" id="goGame">ゲーム</button>
+        <button class="menu-btn continue-btn" id="goContinue">つづく</button>
+        <button class="menu-btn" id="goUpload">アップロード</button>
+        <button class="menu-btn" id="goLearned">単語</button>
+        <div class="menu-utility-row">
+          <button class="menu-utility-btn" id="menuSoundBtn" type="button" aria-label="サウンド">🔊</button>
+          <button class="menu-utility-btn" id="menuLangBtn" type="button" aria-label="Bahasa Indonesia">🇮🇩</button>
+        </div>
       </div>
       </div>
     </div>
   </section>
+
+  <div class="continue-overlay hidden" id="continueOverlay">
+    <div class="continue-card">
+      <button class="continue-close" id="continueClose" type="button">×</button>
+      <div class="continue-title">つづく</div>
+      <div class="continue-subtitle">レベルを選んでください</div>
+      <div class="continue-level-list" id="continueLevelList"></div>
+    </div>
+  </div>
 
   <!-- GAME SETUP -->
   <section class="screen menu-wrap hidden" id="setupScreen">
@@ -1242,6 +1782,7 @@ button{cursor:pointer}
             <option value="N5">N5</option>
             <option value="ALL">全レベル</option>
           </select>
+          <div class="cooldown-notice" id="cooldownNotice"></div>
         </div>
       </div>
 
@@ -1254,14 +1795,32 @@ button{cursor:pointer}
 
   <!-- UPLOAD -->
   <section class="screen menu-wrap hidden" id="uploadScreen">
-    <div class="card menu-card">
+    <div class="card menu-card upload-menu-card">
       <h2 class="section-title">アップロード</h2>
-      <div class="upload-drop">
-        <strong>問題ファイルを選択</strong>
-        <div style="margin-top:6px;font-size:13px">JSONファイルはブラウザに保存されます。</div>
-        <input id="jsonUpload" type="file" accept=".json,application/json">
+
+      <div class="upload-section">
+        <div class="upload-section-title">問題アップロード</div>
+        <div class="upload-drop">
+          <strong>問題ファイルを選択</strong>
+          <div class="upload-help">JSONファイルはブラウザに保存されます。</div>
+          <input id="jsonUpload" type="file" accept=".json,application/json">
+        </div>
+        <p id="uploadStatus" class="upload-status"></p>
       </div>
-      <p id="uploadStatus" style="color:var(--muted);font-size:13px;text-align:center"></p>
+
+      <div class="upload-divider"></div>
+
+      <div class="upload-section">
+        <div class="upload-section-title">セーブ</div>
+        <div class="save-help">別の端末へデータを移すときに使います。</div>
+        <div class="manual-save-row">
+          <button class="manual-save-btn" id="exportSaveBtn" type="button">セーブ書き出し</button>
+          <button class="manual-save-btn" id="importSaveBtn" type="button">セーブ読み込み</button>
+          <input id="importSaveFile" type="file" accept=".json,application/json" hidden>
+        </div>
+        <div class="manual-save-status" id="manualSaveStatus"></div>
+      </div>
+
       <div class="actions">
         <button class="secondary" data-backhome>戻る</button>
       </div>
@@ -1369,7 +1928,7 @@ button{cursor:pointer}
           <h2>PAUSE</h2>
           <div class="pause-list">
             <button class="primary" id="resumeBtn">続ける</button>
-            <button class="secondary" id="soundToggle">🔊 サウンド・音楽 ON</button>
+            <button class="secondary" id="soundToggle">🔊 サウンド ON</button>
             <button class="secondary" id="restartBtn">ゲームをやり直す</button>
             <button class="danger" id="exitBtn">メインメニューへ</button>
           </div>
@@ -1382,8 +1941,8 @@ button{cursor:pointer}
           <h2 id="endTitle">STAGE CLEAR!</h2>
           <p id="endText"></p>
           <div class="pause-list">
-            <button class="primary" id="againBtn">Main Lagi</button>
-            <button class="secondary" id="endHomeBtn">Menu Utama</button>
+            <button class="primary" id="againBtn">もう一度</button>
+            <button class="secondary" id="endHomeBtn">メインメニュー</button>
           </div>
         </div>
       </div>
@@ -1495,28 +2054,725 @@ button{cursor:pointer}
     masteryWrongCounted:false
   };
 
+
+  const LEGACY_GAME_SAVE_KEY="kmr_game_save";
+  const GAME_SAVES_KEY="kmr_game_saves";
+  const LEVEL_COOLDOWNS_KEY="kmr_level_cooldowns";
+  const JLPT_SAVE_LEVELS=["N1","N2","N3","N4","N5"];
+  const COOLDOWN_MS=10*60*1000;
+
+  function saveSlotKey(level,qmode){
+    return `${level}|${qmode==="meaning"?"meaning":"reading"}`;
+  }
+
+  function getGameSaves(){
+    try{
+      const parsed=JSON.parse(localStorage.getItem(GAME_SAVES_KEY)||"{}");
+      return parsed && typeof parsed==="object" ? parsed : {};
+    }catch{
+      return {};
+    }
+  }
+
+  function setGameSaves(saves){
+    localStorage.setItem(GAME_SAVES_KEY,JSON.stringify(saves||{}));
+  }
+
+  function getCooldowns(){
+    try{
+      const parsed=JSON.parse(localStorage.getItem(LEVEL_COOLDOWNS_KEY)||"{}");
+      return parsed && typeof parsed==="object" ? parsed : {};
+    }catch{
+      return {};
+    }
+  }
+
+  function setCooldowns(data){
+    localStorage.setItem(LEVEL_COOLDOWNS_KEY,JSON.stringify(data||{}));
+  }
+
+  function cleanupCooldowns(){
+    const data=getCooldowns();
+    let changed=false;
+    Object.keys(data).forEach(level=>{
+      if(Number(data[level])<=Date.now()){
+        delete data[level];
+        changed=true;
+      }
+    });
+    if(changed)setCooldowns(data);
+    return data;
+  }
+
+  function getCooldownRemaining(level){
+    if(level==="ALL")return 0;
+    const data=cleanupCooldowns();
+    return Math.max(0,Number(data[level]||0)-Date.now());
+  }
+
+  function isLevelCooldown(level){
+    return getCooldownRemaining(level)>0;
+  }
+
+  function formatCooldown(ms){
+    const total=Math.max(0,Math.ceil(ms/1000));
+    const min=Math.floor(total/60);
+    const sec=total%60;
+    return `${String(min).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+  }
+
+  function startLevelCooldown(level){
+    if(!JLPT_SAVE_LEVELS.includes(level))return;
+    const data=getCooldowns();
+    data[level]=Date.now()+COOLDOWN_MS;
+    setCooldowns(data);
+  }
+
+  function migrateLegacyGameSave(){
+    /* Migrasi kmr_game_save versi paling lama. */
+    try{
+      const raw=localStorage.getItem(LEGACY_GAME_SAVE_KEY);
+      if(raw){
+        const old=JSON.parse(raw);
+        const level=old?.settings?.jlpt;
+        const mode=old?.settings?.qmode==="meaning" ? "meaning" : "reading";
+        if(old?.currentQ && level){
+          const saves=getGameSaves();
+          const key=saveSlotKey(level,mode);
+          if(!saves[key])saves[key]=old;
+          setGameSaves(saves);
+        }
+        localStorage.removeItem(LEGACY_GAME_SAVE_KEY);
+      }
+    }catch{}
+
+    /* Migrasi versi sebelumnya yang memakai key N1/N2/... */
+    try{
+      const saves=getGameSaves();
+      let changed=false;
+      JLPT_SAVE_LEVELS.concat(["ALL"]).forEach(level=>{
+        const old=saves[level];
+        if(old?.currentQ){
+          const mode=old?.settings?.qmode==="meaning" ? "meaning" : "reading";
+          const key=saveSlotKey(level,mode);
+          if(!saves[key])saves[key]=old;
+          delete saves[level];
+          changed=true;
+        }
+      });
+      if(changed)setGameSaves(saves);
+    }catch{}
+  }
+
+  function getSavedSlots(){
+    const saves=getGameSaves();
+    return Object.keys(saves).filter(key=>{
+      const save=saves[key];
+      return !!(save && save.currentQ && save.settings);
+    });
+  }
+
+  function hasGameSave(level=null,qmode=null){
+    const saves=getGameSaves();
+    if(level && qmode){
+      return !!saves[saveSlotKey(level,qmode)];
+    }
+    if(level){
+      return ["reading","meaning"].some(mode=>!!saves[saveSlotKey(level,mode)]);
+    }
+    return getSavedSlots().length>0;
+  }
+
+  function updateSetupLevelOptions(){
+    const select=$("jlpt");
+    if(!select)return;
+
+    [...select.options].forEach(opt=>{
+      opt.disabled=false;
+      opt.textContent=opt.value==="ALL" ? "全レベル" : opt.value;
+    });
+
+    updateCooldownNotice();
+  }
+
+  function updateCooldownNotice(){
+    const el=$("cooldownNotice");
+    if(!el)return;
+    const level=$("jlpt")?.value || settings.jlpt;
+    const remaining=getCooldownRemaining(level);
+    el.textContent=remaining>0 ? tr("cooldownLevel",level,formatCooldown(remaining)) : "";
+  }
+
+  function updateContinueButton(){
+    const continueBtn=$("goContinue");
+    const gameBtn=$("goGame");
+    if(!continueBtn || !gameBtn)return;
+
+    const slots=getSavedSlots();
+    continueBtn.disabled=slots.length===0;
+    continueBtn.title=slots.length ? tr("continueTip") : tr("noSave");
+
+    /* ゲーム ボタンは常に表示する */
+    gameBtn.style.display="";
+
+    updateSetupLevelOptions();
+  }
+
+  function saveGameState(){
+    if(!currentQ || $("gameScreen").classList.contains("hidden"))return;
+
+    const level=settings.jlpt || currentQ.jlpt || "N3";
+    const mode=settings.qmode==="meaning" ? "meaning" : "reading";
+    const key=saveSlotKey(level,mode);
+
+    const save={
+      version:3,
+      savedAt:new Date().toISOString(),
+      settings:{
+        qmode:mode,
+        runmode:"srs",
+        jlpt:level
+      },
+      currentQ:{
+        kanji:currentQ.kanji,
+        reading:currentQ.reading,
+        meaning:currentQ.meaning,
+        jlpt:currentQ.jlpt
+      },
+      state:{
+        correct:state.correct||0,
+        attempted:state.attempted||0,
+        score:state.score||0,
+        combo:state.combo||0,
+        hp:Math.max(0,state.hp||0),
+        remaining:Math.max(0.5,Math.min(10,state.remaining||10)),
+        masteryWrongCounted:!!state.masteryWrongCounted
+      }
+    };
+
+    const saves=getGameSaves();
+    saves[key]=save;
+    setGameSaves(saves);
+    updateContinueButton();
+  }
+
+  function removeCurrentGameSave(){
+    const level=settings.jlpt;
+    const mode=settings.qmode==="meaning" ? "meaning" : "reading";
+    const saves=getGameSaves();
+    delete saves[saveSlotKey(level,mode)];
+    setGameSaves(saves);
+    updateContinueButton();
+  }
+
+  function getMemorizedVocabCount(level){
+    const learned=getLearned();
+    return Object.values(learned)
+      .map(item=>normalizeLearnedItem(item))
+      .filter(item=>{
+        const levelMatch=level==="ALL" ? true : item.jlpt===level;
+        return levelMatch && item.mastery>0;
+      }).length;
+  }
+
+  function openContinueSelector(){
+    const saves=getGameSaves();
+    const modeOrder=["reading","meaning"];
+    const available=[];
+
+    JLPT_SAVE_LEVELS.concat(["ALL"]).forEach(level=>{
+      modeOrder.forEach(mode=>{
+        const key=saveSlotKey(level,mode);
+        if(saves[key]?.currentQ){
+          available.push({key,level,mode,save:saves[key]});
+        }
+      });
+    });
+
+    if(!available.length){
+      updateContinueButton();
+      return;
+    }
+
+    $("continueLevelList").innerHTML=available.map(item=>{
+      const {key,level,mode,save}=item;
+      const qmode=mode==="meaning" ? "意味" : "読みかた";
+      const savedAt=save.savedAt ? new Date(save.savedAt) : null;
+      const time=savedAt && !Number.isNaN(savedAt.getTime())
+        ? savedAt.toLocaleString(uiLang==="id"?"id-ID":"ja-JP",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"})
+        : "";
+      const remaining=getCooldownRemaining(level);
+      const locked=remaining>0;
+
+      const memorizedCount=getMemorizedVocabCount(level);
+      const badge=mode==="meaning" ? "意" : "読";
+      const badgeClass=mode==="meaning" ? "meaning" : "reading";
+
+      return `
+        <button class="continue-level-btn${locked?" cooldown":""}" type="button"
+                data-continue-slot="${key}" ${locked?"disabled":""}>
+          <span class="continue-level-name">${level==="ALL"?"ALL":level}</span>
+          <span class="continue-level-meta">
+            <span class="continue-vocab-count">${tr("memorized",memorizedCount)}</span>
+            <span class="continue-save-time">${time}</span>
+            ${locked?`<div class="continue-level-cooldown">${tr("cooldown",formatCooldown(remaining))}</div>`:""}
+          </span>
+          <span class="continue-mode-badge ${badgeClass}">${badge}</span>
+        </button>`;
+    }).join("");
+
+    $("continueLevelList").querySelectorAll("[data-continue-slot]:not(:disabled)").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        $("continueOverlay").classList.add("hidden");
+        loadGameSave(btn.dataset.continueSlot);
+      });
+    });
+
+    $("continueOverlay").classList.remove("hidden");
+  }
+
+
+
+  function showManualSaveStatus(text,isError=false){
+    const el=$("manualSaveStatus");
+    if(!el)return;
+    el.textContent=text;
+    el.style.color=isError ? "#d96a79" : "#5b93bd";
+    clearTimeout(showManualSaveStatus._t);
+    showManualSaveStatus._t=setTimeout(()=>{
+      if(el.textContent===text)el.textContent="";
+    },3500);
+  }
+
+  function exportManualSave(){
+    /* Simpan kondisi game terakhir dulu bila pemain sedang berada di game. */
+    if(!$("gameScreen").classList.contains("hidden")){
+      saveGameState();
+    }
+
+    const bundle={
+      app:"漢字絵文字",
+      format:"kmr-manual-save",
+      version:1,
+      exportedAt:new Date().toISOString(),
+      data:{
+        gameSaves:localStorage.getItem(GAME_SAVES_KEY),
+        cooldowns:localStorage.getItem(LEVEL_COOLDOWNS_KEY),
+        learned:localStorage.getItem("kmr_learned"),
+        custom:localStorage.getItem("kmr_custom")
+      }
+    };
+
+    const blob=new Blob(
+      [JSON.stringify(bundle,null,2)],
+      {type:"application/json;charset=utf-8"}
+    );
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    const stamp=new Date().toISOString().slice(0,10).replaceAll("-","");
+    a.href=url;
+    a.download=`kanji-emoji-save-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+
+    showManualSaveStatus(tr("exportDone"));
+  }
+
+  async function importManualSaveFile(file){
+    if(!file)return;
+
+    try{
+      const text=await file.text();
+      const bundle=JSON.parse(text);
+
+      if(!bundle || bundle.format!=="kmr-manual-save" || !bundle.data){
+        throw new Error("invalid-format");
+      }
+
+      const d=bundle.data;
+
+      if(d.gameSaves!==null && d.gameSaves!==undefined){
+        if(d.gameSaves){
+          const imported=JSON.parse(d.gameSaves);
+          if(!imported || typeof imported!=="object")throw new Error("invalid-saves");
+          localStorage.setItem(GAME_SAVES_KEY,JSON.stringify(imported));
+        }else{
+          localStorage.removeItem(GAME_SAVES_KEY);
+        }
+      }else if(d.gameSave){
+        /* Kompatibilitas file save versi lama. */
+        const legacy=JSON.parse(d.gameSave);
+        const level=legacy?.settings?.jlpt;
+        if(level){
+          const saves=getGameSaves();
+          const mode=legacy?.settings?.qmode==="meaning" ? "meaning" : "reading";
+          saves[saveSlotKey(level,mode)]=legacy;
+          setGameSaves(saves);
+        }
+      }
+
+
+      if(d.cooldowns!==null && d.cooldowns!==undefined){
+        if(d.cooldowns){
+          const importedCooldowns=JSON.parse(d.cooldowns);
+          if(!importedCooldowns || typeof importedCooldowns!=="object")throw new Error("invalid-cooldowns");
+          localStorage.setItem(LEVEL_COOLDOWNS_KEY,JSON.stringify(importedCooldowns));
+        }else{
+          localStorage.removeItem(LEVEL_COOLDOWNS_KEY);
+        }
+      }
+
+      if(d.learned!==null && d.learned!==undefined){
+        if(d.learned){
+          JSON.parse(d.learned);
+          localStorage.setItem("kmr_learned",d.learned);
+        }else{
+          localStorage.removeItem("kmr_learned");
+        }
+      }
+
+      if(d.custom!==null && d.custom!==undefined){
+        if(d.custom){
+          JSON.parse(d.custom);
+          localStorage.setItem("kmr_custom",d.custom);
+        }else{
+          localStorage.removeItem("kmr_custom");
+        }
+      }
+
+      updateContinueButton();
+      showManualSaveStatus(tr("importDone"));
+
+      /* Jika halaman 単語 sedang terbuka, langsung refresh isi. */
+      if(!$("learnedScreen").classList.contains("hidden")){
+        renderLearned();
+      }
+    }catch(err){
+      console.error(err);
+      showManualSaveStatus(tr("importFail"),true);
+    }finally{
+      $("importSaveFile").value="";
+    }
+  }
+
+  function loadGameSave(slotKey){
+    const saves=getGameSaves();
+    const save=saves[slotKey];
+
+    if(!save || !save.currentQ || !save.settings){
+      updateContinueButton();
+      return;
+    }
+
+    const level=save.settings.jlpt || slotKey.split("|")[0] || "N3";
+    if(isLevelCooldown(level)){
+      openContinueSelector();
+      return;
+    }
+
+    settings.qmode=save.settings.qmode==="meaning" ? "meaning" : "reading";
+    settings.runmode="srs";
+    settings.jlpt=level;
+
+    $("jlpt").value=settings.jlpt;
+    document.querySelectorAll("[data-qmode]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.qmode===settings.qmode);
+    });
+
+    state={
+      pool:buildPool(),queue:[],index:0,
+      correct:Number(save.state?.correct)||0,
+      attempted:Number(save.state?.attempted)||0,
+      target:Infinity,
+      score:Number(save.state?.score)||0,
+      combo:Number(save.state?.combo)||0,
+      hp:Math.max(1,Math.min(3,Number(save.state?.hp)||3)),
+      bossActive:false,bossDefeated:false,bossSeen:false,nextBossAt:10,
+      resultOpen:false,resultOutcome:null,
+      remaining:Math.max(.5,Math.min(10,Number(save.state?.remaining)||10)),
+      paused:false,locked:false,timer:null,timerStarted:0,
+      pausedRemaining:Math.max(.5,Math.min(10,Number(save.state?.remaining)||10)),
+      masteryWrongCounted:!!save.state?.masteryWrongCounted
+    };
+
+    currentQ=save.currentQ;
+
+    $("stageName").textContent=`${settings.jlpt} · ${settings.qmode==="reading"?tr("reading"):tr("meaning")} · SRS 35`;
+    $("pauseOverlay").classList.add("hidden");
+    $("endOverlay").classList.add("hidden");
+    $("resultOverlay").classList.add("hidden");
+
+    showScreen("gameScreen");
+    initAudio();
+    startBattleMusic();
+
+    setEnemy();
+    $("prompt").textContent=currentQ.kanji;
+    $("questionNote").textContent=settings.qmode==="reading" ? tr("readingQuestion") : tr("meaningQuestion");
+    $("answer").placeholder="Ketik Jawaban";
+    $("answer").value="";
+    $("answer").disabled=false;
+    updateCurrentMasteryDisplay();
+    updateHUD();
+    $("timerFill").style.width=(state.remaining*10)+"%";
+    $("timerFill").style.background=state.remaining<3 ? "var(--bad)" : "var(--gold)";
+    $("answer").focus();
+
+    state.timerStarted=performance.now()-(10-state.remaining)*1000;
+    startTimer(true);
+  }
+
+  const UI_LANG_KEY="kmr_ui_lang";
+  let uiLang=localStorage.getItem(UI_LANG_KEY)==="id" ? "id" : "ja";
+
+  const UI_TEXT={
+    ja:{
+      game:"ゲーム",continue:"つづく",upload:"アップロード",words:"単語",
+      continueChoose:"レベルを選んでください",
+      questionType:"問題タイプ",reading:"読みかた",meaning:"意味",
+      allLevels:"全レベル",back:"戻る",start:"ゲーム開始",
+      questionUpload:"問題アップロード",chooseQuestionFile:"問題ファイルを選択",
+      questionFileHelp:"JSONファイルはブラウザに保存されます。",
+      save:"セーブ",saveHelp:"別の端末へデータを移すときに使います。",
+      exportSave:"セーブ書き出し",importSave:"セーブ読み込み",
+      resetHistory:"履歴をリセット",resetTitle:"履歴を削除しますか？",
+      resetText:"SRSの進捗とMASTEREDステータスがすべて削除されます。よろしいですか？",
+      cancel:"キャンセル",delete:"削除する",
+      score:"スコア",playerHp:"プレイヤーHP",combo:"コンボ",
+      resultNext:"クリックまたはENTERで次へ",
+      resume:"続ける",soundOn:"サウンド ON",soundOff:"サウンド OFF",
+      restart:"ゲームをやり直す",mainMenu:"メインメニューへ",
+      again:"もう一度",mainMenuShort:"メインメニュー",
+      readingQuestion:"読み方は？",meaningQuestion:"意味は？",
+      mastery:"習得度",correct:"正解",timeUp:"時間切れ",
+      wrongRetry:"ちがいます！もう一度",
+      emptyWords:"まだ単語が記録されていません。",
+      remainingCorrect:n=>`あと${n}回正解`,
+      memorized:n=>`覚えた単語 ${n}語`,
+      cooldown:t=>`あと ${t}`,
+      cooldownLevel:(level,t)=>`${level} · あと ${t}`,
+      savedQuestions:n=>`問題を${n}問保存しました。`,
+      exportDone:"セーブファイルを書き出しました",
+      importDone:"セーブデータを読み込みました",
+      importFail:"セーブファイルを読み込めません",
+      noSave:"セーブデータがありません",
+      continueTip:"レベルと問題タイプを選んで続ける",
+      gameOverCooldown:level=>`${level} は10分間プレイできません。`,
+      languageTarget:"Bahasa Indonesia"
+    },
+    id:{
+      game:"Game",continue:"Lanjut",upload:"Upload",words:"Kosakata",
+      continueChoose:"Pilih level yang ingin dilanjutkan",
+      questionType:"Tipe Soal",reading:"Cara Baca",meaning:"Arti",
+      allLevels:"Semua Level",back:"Kembali",start:"Mulai Game",
+      questionUpload:"Upload Soal",chooseQuestionFile:"Pilih File Soal",
+      questionFileHelp:"File JSON akan disimpan di browser.",
+      save:"Save",saveHelp:"Gunakan untuk memindahkan data ke perangkat lain.",
+      exportSave:"Ekspor Save",importSave:"Impor Save",
+      resetHistory:"Reset Riwayat",resetTitle:"Hapus riwayat?",
+      resetText:"Semua progres SRS dan status MASTERED akan dihapus. Lanjutkan?",
+      cancel:"Batal",delete:"Hapus",
+      score:"Skor",playerHp:"HP Pemain",combo:"Kombo",
+      resultNext:"KLIK AREA INI ATAU TEKAN ENTER UNTUK LANJUT",
+      resume:"Lanjutkan",soundOn:"Suara ON",soundOff:"Suara OFF",
+      restart:"Ulangi Game",mainMenu:"Menu Utama",
+      again:"Main Lagi",mainMenuShort:"Menu Utama",
+      readingQuestion:"Bagaimana cara bacanya?",meaningQuestion:"Apa artinya?",
+      mastery:"Penguasaan",correct:"Benar",timeUp:"Waktu Habis",
+      wrongRetry:"Salah! Coba lagi",
+      emptyWords:"Belum ada kosakata yang tercatat.",
+      remainingCorrect:n=>`Butuh ${n} jawaban benar lagi`,
+      memorized:n=>`Kosakata dipelajari ${n}`,
+      cooldown:t=>`Tunggu ${t}`,
+      cooldownLevel:(level,t)=>`${level} · tunggu ${t}`,
+      savedQuestions:n=>`${n} soal berhasil disimpan.`,
+      exportDone:"File save berhasil diekspor",
+      importDone:"Data save berhasil dimuat",
+      importFail:"File save tidak dapat dibaca",
+      noSave:"Belum ada data save",
+      continueTip:"Pilih level dan tipe soal untuk melanjutkan",
+      gameOverCooldown:level=>`${level} tidak dapat dimainkan selama 10 menit.`,
+      languageTarget:"日本語"
+    }
+  };
+
+  function tr(key,...args){
+    const value=UI_TEXT[uiLang]?.[key] ?? UI_TEXT.ja[key] ?? key;
+    return typeof value==="function" ? value(...args) : value;
+  }
+
+  function setUiText(selector,text){
+    const el=document.querySelector(selector);
+    if(el)el.textContent=text;
+  }
+
+  function applyLanguage(){
+    document.documentElement.lang=uiLang==="id" ? "id" : "ja";
+
+    $("goGame").textContent=tr("game");
+    $("goContinue").textContent=tr("continue");
+    $("goUpload").textContent=tr("upload");
+    $("goLearned").textContent=tr("words");
+
+    setUiText("#continueOverlay .continue-title",tr("continue"));
+    setUiText("#continueOverlay .continue-subtitle",tr("continueChoose"));
+
+    setUiText("#setupScreen .section-title",tr("game"));
+    const setupLabels=document.querySelectorAll("#setupScreen label");
+    if(setupLabels[0])setupLabels[0].textContent=tr("questionType");
+    const readingBtn=document.querySelector('[data-qmode="reading"]');
+    const meaningBtn=document.querySelector('[data-qmode="meaning"]');
+    if(readingBtn)readingBtn.textContent=tr("reading");
+    if(meaningBtn)meaningBtn.textContent=tr("meaning");
+    const allOption=[...$("jlpt").options].find(o=>o.value==="ALL");
+    if(allOption)allOption.textContent=tr("allLevels");
+    $("startGame").textContent=tr("start");
+
+    setUiText("#uploadScreen .section-title",tr("upload"));
+    const uploadTitles=document.querySelectorAll("#uploadScreen .upload-section-title");
+    if(uploadTitles[0])uploadTitles[0].textContent=tr("questionUpload");
+    if(uploadTitles[1])uploadTitles[1].textContent=tr("save");
+    setUiText("#uploadScreen .upload-drop strong",tr("chooseQuestionFile"));
+    setUiText("#uploadScreen .upload-help",tr("questionFileHelp"));
+    setUiText("#uploadScreen .save-help",tr("saveHelp"));
+    $("exportSaveBtn").textContent=tr("exportSave");
+    $("importSaveBtn").textContent=tr("importSave");
+
+    setUiText("#learnedScreen .section-title",tr("words"));
+    $("clearLearned").textContent=tr("resetHistory");
+    setUiText("#confirmResetOverlay .confirm-title",tr("resetTitle"));
+    setUiText("#confirmResetOverlay .confirm-text",tr("resetText"));
+    $("cancelResetBtn").textContent=tr("cancel");
+    $("confirmResetBtn").textContent=tr("delete");
+
+    document.querySelectorAll("[data-backhome]").forEach(btn=>btn.textContent=tr("back"));
+
+    const statLabels=document.querySelectorAll(".monster-hud .stat-label");
+    if(statLabels[0])statLabels[0].textContent=tr("score");
+    if(statLabels[1])statLabels[1].textContent=tr("playerHp");
+    if(statLabels[2])statLabels[2].textContent=tr("combo");
+
+    setUiText(".result-continue",tr("resultNext"));
+    $("resumeBtn").textContent=tr("resume");
+    $("restartBtn").textContent=tr("restart");
+    $("exitBtn").textContent=tr("mainMenu");
+    $("againBtn").textContent=tr("again");
+    $("endHomeBtn").textContent=tr("mainMenuShort");
+
+    if(currentQ){
+      $("questionNote").textContent=settings.qmode==="reading" ? tr("readingQuestion") : tr("meaningQuestion");
+      $("stageName").textContent=`${settings.jlpt} · ${settings.qmode==="reading"?tr("reading"):tr("meaning")} · SRS 35`;
+      updateCurrentMasteryDisplay();
+      if(state.resultOpen){
+        $("resultStatus").textContent=state.resultOutcome==="correct" ? tr("correct") : tr("timeUp");
+      }
+    }
+
+    const langBtn=$("menuLangBtn");
+    if(langBtn){
+      langBtn.textContent=uiLang==="ja" ? "🇮🇩" : "🇯🇵";
+      langBtn.title=tr("languageTarget");
+      langBtn.setAttribute("aria-label",tr("languageTarget"));
+    }
+
+    updateSoundUI();
+    updateContinueButton();
+    if(!$("learnedScreen").classList.contains("hidden"))renderLearned();
+    if(!$("continueOverlay").classList.contains("hidden"))openContinueSelector();
+  }
+
+  function toggleLanguage(){
+    uiLang=uiLang==="ja" ? "id" : "ja";
+    localStorage.setItem(UI_LANG_KEY,uiLang);
+    applyLanguage();
+  }
+
   let audioCtx=null;
   let soundOn=true;
   let musicTimer=null;
   let beat=0;
 
+  function updateSoundUI(){
+    const menuBtn=$("menuSoundBtn");
+    if(menuBtn){
+      menuBtn.textContent=soundOn?"🔊":"🔇";
+      menuBtn.classList.toggle("sound-off",!soundOn);
+      const label=soundOn?tr("soundOn"):tr("soundOff");
+      menuBtn.setAttribute("aria-label",label);
+      menuBtn.title=label;
+    }
+    const pauseBtn=$("soundToggle");
+    if(pauseBtn){
+      pauseBtn.textContent=(soundOn?"🔊 ":"🔇 ")+(soundOn?tr("soundOn"):tr("soundOff"));
+    }
+  }
+
+  function toggleSound(){
+    soundOn=!soundOn;
+    updateSoundUI();
+
+    if(soundOn){
+      initAudio();
+      if(!$("gameScreen").classList.contains("hidden")){
+        if(state.resultOpen || state.locked) startResultMusic();
+        else startBattleMusic();
+      }else{
+        startMenuMusic();
+      }
+      tone(660,.08,"square",.03);
+    }else{
+      stopMusic();
+    }
+  }
+
   function showScreen(id){
     screens.forEach(s => $(s).classList.toggle("hidden", s!==id));
+    if(id==="homeScreen")updateContinueButton();
     if(id!=="gameScreen") startMenuMusic();
   }
 
   document.querySelectorAll("[data-backhome]").forEach(btn=>{
     btn.addEventListener("click",()=>showScreen("homeScreen"));
   });
-  $("goGame").onclick=()=>showScreen("setupScreen");
+  $("goGame").onclick=()=>{
+    updateSetupLevelOptions();
+    showScreen("setupScreen");
+  };
+  $("goContinue").onclick=openContinueSelector;
   $("goUpload").onclick=()=>showScreen("uploadScreen");
   $("goLearned").onclick=()=>{renderLearned();showScreen("learnedScreen")};
+  $("menuSoundBtn").onclick=toggleSound;
+  $("menuLangBtn").onclick=toggleLanguage;
+  updateSoundUI();
+
+  migrateLegacyGameSave();
+
+  $("exportSaveBtn").onclick=exportManualSave;
+  $("importSaveBtn").onclick=()=>$("importSaveFile").click();
+  $("importSaveFile").addEventListener("change",e=>{
+    importManualSaveFile(e.target.files?.[0]);
+  });
+
+  updateContinueButton();
+  applyLanguage();
+
+  $("continueClose").onclick=()=>$("continueOverlay").classList.add("hidden");
+  $("continueOverlay").addEventListener("click",e=>{
+    if(e.target===$("continueOverlay")){
+      $("continueOverlay").classList.add("hidden");
+    }
+  });
+
+  $("jlpt").addEventListener("change",updateCooldownNotice);
 
   document.querySelectorAll("[data-qmode]").forEach(btn=>{
     btn.addEventListener("click",()=>{
       document.querySelectorAll("[data-qmode]").forEach(b=>b.classList.remove("active"));
       btn.classList.add("active");
       settings.qmode=btn.dataset.qmode;
+      updateCooldownNotice();
     });
   });
 
@@ -1578,7 +2834,7 @@ button{cursor:pointer}
     });
 
     if(!entries.length){
-      list.innerHTML='<div class="empty">まだ単語が記録されていません。</div>';
+      list.innerHTML=`<div class="empty">${tr("emptyWords")}</div>`;
       return;
     }
 
@@ -1643,9 +2899,9 @@ button{cursor:pointer}
     $("learnedDetailKanji").textContent=item.kanji;
     $("learnedDetailReading").textContent=item.reading;
     $("learnedDetailMeaning").textContent=item.meaning;
-    $("learnedProgressLabel").textContent=mastered ? "MASTERED · 35/35" : `習得度 ${item.mastery}/35`;
+    $("learnedProgressLabel").textContent=mastered ? "MASTERED · 35/35" : `${tr("mastery")} ${item.mastery}/35`;
     $("learnedProgressFill").style.width=`${item.mastery/35*100}%`;
-    $("learnedDetailStatus").textContent=mastered ? "MASTERED" : `あと${35-item.mastery}回正解`;
+    $("learnedDetailStatus").textContent=mastered ? "MASTERED" : tr("remainingCorrect",35-item.mastery);
     $("learnedDetailStatus").classList.toggle("mastered",mastered);
     $("learnedDetailOverlay").classList.remove("hidden");
   }
@@ -1673,9 +2929,9 @@ button{cursor:pointer}
         }));
       if(!clean.length)throw new Error("Tidak ada data valid.");
       localStorage.setItem("kmr_custom",JSON.stringify(clean));
-      $("uploadStatus").textContent=`問題を${clean.length}問保存しました。`;
+      $("uploadStatus").textContent=tr("savedQuestions",clean.length);
     }catch(err){
-      $("uploadStatus").textContent="Gagal: "+err.message;
+      $("uploadStatus").textContent=(uiLang==="id"?"Gagal: ":"エラー: ")+err.message;
     }
     e.target.value="";
   });
@@ -1955,11 +3211,11 @@ button{cursor:pointer}
     const mastery=getMastery(currentQ);
     const mastered=mastery>=35;
 
-    $("masteryInfo").textContent=mastered ? "MASTERED" : `習得度 ${mastery}/35`;
+    $("masteryInfo").textContent=mastered ? "MASTERED" : `${tr("mastery")} ${mastery}/35`;
     $("masteryInfo").classList.toggle("mastered",mastered);
 
     if($("resultMastery")){
-      $("resultMastery").textContent=mastered ? "MASTERED · 35/35" : `習得度 ${mastery}/35`;
+      $("resultMastery").textContent=mastered ? "MASTERED · 35/35" : `${tr("mastery")} ${mastery}/35`;
       $("resultMastery").classList.toggle("mastered",mastered);
     }
   }
@@ -1987,7 +3243,7 @@ button{cursor:pointer}
 
     const card=$("resultCard");
     card.className="result-card "+(outcome==="correct"?"correct":"failed");
-    $("resultStatus").textContent=outcome==="correct" ? "正解" : "時間切れ";
+    $("resultStatus").textContent=outcome==="correct" ? tr("correct") : tr("timeUp");
     $("resultKanji").textContent=currentQ.kanji;
     $("resultReading").textContent=currentQ.reading;
     $("resultMeaning").textContent=currentQ.meaning;
@@ -2018,7 +3274,9 @@ button{cursor:pointer}
 
     if(outcome==="failed"){
       if(state.hp<=0){
-        finishGame(false,"HP kamu habis.");
+        startLevelCooldown(settings.jlpt);
+        removeCurrentGameSave();
+        finishGame(false,tr("gameOverCooldown",settings.jlpt));
       }else{
         loadRound();
       }
@@ -2037,8 +3295,8 @@ button{cursor:pointer}
     setEnemy();
 
     $("prompt").textContent=currentQ.kanji;
-    $("questionNote").textContent=settings.qmode==="reading" ? "読み方は？" : "Apa artinya?";
-    $("answer").placeholder=settings.qmode==="reading" ? "Ketik Jawaban" : "arti dalam Bahasa Indonesia";
+    $("questionNote").textContent=settings.qmode==="reading" ? tr("readingQuestion") : tr("meaningQuestion");
+    $("answer").placeholder="Ketik Jawaban";
     $("answer").value="";
     $("answer").disabled=false;
     updateCurrentMasteryDisplay();
@@ -2049,6 +3307,7 @@ button{cursor:pointer}
     $("timerFill").style.background="var(--gold)";
     $("answer").focus();
     startTimer();
+    saveGameState();
   }
 
   function startTimer(resume=false){
@@ -2102,11 +3361,12 @@ button{cursor:pointer}
 
     updateHUD();
     sWrong();
-    showFeedback("ちがいます！もう一度","warn",500);
+    showFeedback(tr("wrongRetry"),"warn",500);
     const shell=$("answerShell");
     shell.classList.remove("input-shake");void shell.offsetWidth;shell.classList.add("input-shake");
     $("answer").value="";
     $("answer").focus();
+    saveGameState();
   }
 
   function correct(){
@@ -2120,6 +3380,7 @@ button{cursor:pointer}
     updateMastery(currentQ,+1);
     updateCurrentMasteryDisplay();
     updateHUD();
+    saveGameState();
     sCorrect();
 
     const mw=$("monsterWrap");
@@ -2177,6 +3438,16 @@ button{cursor:pointer}
   function startGame(){
     settings.jlpt=$("jlpt").value;
 
+    if(isLevelCooldown(settings.jlpt)){
+      updateCooldownNotice();
+      return;
+    }
+
+    if(hasGameSave(settings.jlpt,settings.qmode)){
+      openContinueSelector();
+      return;
+    }
+
     state={
       pool:buildPool(),queue:[],index:0,correct:0,attempted:0,
       target:Infinity,
@@ -2186,7 +3457,7 @@ button{cursor:pointer}
       masteryWrongCounted:false
     };
 
-    $("stageName").textContent=`${settings.jlpt} · ${settings.qmode==="reading"?"読みかた":"意味"} · SRS 35`;
+    $("stageName").textContent=`${settings.jlpt} · ${settings.qmode==="reading"?tr("reading"):tr("meaning")} · SRS 35`;
     $("pauseOverlay").classList.add("hidden");
     $("endOverlay").classList.add("hidden");
     $("resultOverlay").classList.add("hidden");
@@ -2223,6 +3494,7 @@ button{cursor:pointer}
     state.paused=true;
     state.pausedRemaining=state.remaining;
     clearInterval(state.timer);
+    saveGameState();
     $("pauseOverlay").classList.remove("hidden");
   }
   function resumeGame(){
@@ -2235,27 +3507,29 @@ button{cursor:pointer}
   }
   $("pauseBtn").onclick=pauseGame;
   $("resumeBtn").onclick=resumeGame;
-  $("soundToggle").onclick=()=>{
-    soundOn=!soundOn;
-    $("soundToggle").textContent=soundOn?"🔊 サウンド・音楽 ON":"🔇 サウンド・音楽 OFF";
-    if(soundOn){
-      initAudio();
-      if(!$("gameScreen").classList.contains("hidden")){
-        if(state.resultOpen || state.locked) startResultMusic();
-        else startBattleMusic();
-      }else{
-        startMenuMusic();
-      }
-      tone(660,.08,"square",.03);
-    }else stopMusic();
-  };
+  $("soundToggle").onclick=toggleSound;
   $("restartBtn").onclick=()=>{stopMusic();startGame()};
   $("exitBtn").onclick=()=>{
+    saveGameState();
     clearInterval(state.timer);stopMusic();state.locked=true;state.paused=false;state.resultOpen=false;
     $("pauseOverlay").classList.add("hidden");$("resultOverlay").classList.add("hidden");showScreen("homeScreen");
   };
-  $("againBtn").onclick=startGame;
+  $("againBtn").onclick=()=>{
+    if(isLevelCooldown(settings.jlpt)){
+      stopMusic();
+      showScreen("homeScreen");
+      return;
+    }
+    startGame();
+  };
   $("endHomeBtn").onclick=()=>{stopMusic();showScreen("homeScreen")};
+
+
+  setInterval(()=>{
+    if(!$("setupScreen").classList.contains("hidden")){
+      updateCooldownNotice();
+    }
+  },1000);
 
   /* Prevent accidental timer running in hidden tab */
   document.addEventListener("visibilitychange",()=>{
