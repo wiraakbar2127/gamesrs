@@ -2960,6 +2960,245 @@ button{cursor:pointer}
   }
 }
 
+
+/* ===== FINAL TANGO SPACING ===== */
+
+/* Jarak antar folder level dibuat lebih rapat dan konsisten */
+#learnedScreen .learned-list{
+  gap:7px !important;
+}
+
+#learnedScreen .learned-level-group{
+  margin:0 !important;
+}
+
+#learnedScreen .learned-folder-content{
+  margin-top:4px !important;
+}
+
+@media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen .learned-list{
+    gap:5px !important;
+    padding-top:0 !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-level-group{
+    margin:0 !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-folder-content{
+    margin-top:3px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-item{
+    margin:0 !important;
+  }
+}
+
+
+/* ===== FINAL TANGO ULTRA TIGHT SPACING ===== */
+#learnedScreen .learned-list{
+  gap:3px !important;
+  row-gap:3px !important;
+}
+
+#learnedScreen .learned-level-group{
+  margin:0 !important;
+  padding:0 !important;
+}
+
+#learnedScreen .learned-level-title{
+  margin:0 !important;
+}
+
+#learnedScreen .learned-folder-content{
+  margin-top:1px !important;
+  padding-top:0 !important;
+}
+
+@media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen .learned-list{
+    gap:2px !important;
+    row-gap:2px !important;
+    padding-top:0 !important;
+    padding-bottom:3px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-level-group{
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-level-title{
+    margin:0 !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-folder-content{
+    margin-top:1px !important;
+    padding-top:0 !important;
+  }
+}
+
+
+/* ===== FINAL TANGO ALL LEVELS + COUNTS ===== */
+#learnedScreen .learned-list{
+  gap:0 !important;
+  row-gap:0 !important;
+}
+
+#learnedScreen .learned-level-group{
+  width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  gap:0 !important;
+}
+
+#learnedScreen .learned-level-title{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:7px 11px !important;
+  border-radius:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:8px !important;
+  box-shadow:none !important;
+  border-bottom:1px solid rgba(116,173,216,.28) !important;
+}
+
+#learnedScreen .learned-level-group:first-child .learned-level-title{
+  border-radius:12px 12px 0 0 !important;
+}
+
+#learnedScreen .learned-level-group:last-child:not(.open) .learned-level-title{
+  border-radius:0 0 12px 12px !important;
+}
+
+#learnedScreen .folder-left{
+  display:flex;
+  align-items:center;
+  gap:6px !important;
+  min-width:58px;
+}
+
+#learnedScreen .folder-level-name{
+  font-weight:1000;
+  letter-spacing:.04em;
+}
+
+#learnedScreen .folder-level-right{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:7px;
+  min-width:0;
+}
+
+#learnedScreen .folder-memorized{
+  color:#5995bf;
+  font-size:10px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+#learnedScreen .folder-total{
+  min-width:54px;
+  padding:3px 7px;
+  border-radius:999px;
+  background:#ffffff;
+  border:1px solid #b9daf1;
+  color:#4c82ac;
+  font-size:10px;
+  line-height:1;
+  font-weight:1000;
+  white-space:nowrap;
+  text-align:center;
+}
+
+#learnedScreen .folder-arrow{
+  width:12px;
+  flex:0 0 12px;
+  text-align:center;
+}
+
+#learnedScreen .learned-folder-content{
+  width:100% !important;
+  margin:0 !important;
+  padding:4px 0 5px !important;
+  gap:5px !important;
+}
+
+#learnedScreen .level-empty{
+  padding:10px;
+  font-size:10px;
+  text-align:center;
+}
+
+/* Saat folder terbuka, beri pemisah lembut tanpa menambah gap antar level. */
+#learnedScreen .learned-level-group.open{
+  padding-bottom:0 !important;
+}
+
+@media(max-width:700px){
+  body.kanji-data-scroll #learnedScreen .learned-list{
+    gap:0 !important;
+    row-gap:0 !important;
+    padding-top:0 !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-level-group{
+    gap:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-level-title{
+    height:34px !important;
+    min-height:34px !important;
+    padding:5px 8px !important;
+    font-size:10.5px !important;
+    gap:5px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-left{
+    min-width:52px;
+    gap:4px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-icon{
+    font-size:12px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-level-right{
+    gap:4px;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-memorized{
+    font-size:8px;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-total{
+    min-width:47px;
+    padding:2px 5px;
+    font-size:8px;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-arrow{
+    width:9px;
+    flex-basis:9px;
+    font-size:8px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-folder-content{
+    margin:0 !important;
+    padding:3px 0 4px !important;
+    gap:4px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3955,7 +4194,8 @@ button{cursor:pointer}
       mastery:Math.max(0,Math.min(35,Number.isFinite(legacyCount)?legacyCount:0)),
       correctTotal:Number(item?.correctTotal ?? item?.count ?? 0) || 0,
       wrongTotal:Number(item?.wrongTotal ?? 0) || 0,
-      last:item?.last || null
+      last:item?.last || null,
+      nextReviewAt:Number(item?.nextReviewAt ?? 0) || 0
     };
   }
 
@@ -3966,66 +4206,104 @@ button{cursor:pointer}
     return normalizeLearnedItem(item,q).mastery;
   }
 
-  function updateMastery(q,delta){
+  const REVIEW_DELAY_MS=12*60*1000;
+
+  function updateMastery(q,delta,{scheduleReview=false}={}){
     const all=getLearned();
     const key=learnedKey(q);
-    const item=normalizeLearnedItem(all[key],q);
+    const old=normalizeLearnedItem(all[key],q);
+    const mastery=Math.max(0,Math.min(35,old.mastery+delta));
 
-    item.mastery=Math.max(0,Math.min(35,item.mastery+delta));
-    if(delta>0)item.correctTotal++;
-    if(delta<0)item.wrongTotal++;
-    item.last=new Date().toISOString();
+    all[key]={
+      ...old,
+      kanji:q.kanji,
+      reading:q.reading,
+      meaning:q.meaning,
+      jlpt:q.jlpt,
+      mastery,
+      correctTotal:old.correctTotal+(delta>0?1:0),
+      wrongTotal:old.wrongTotal+(delta<0?1:0),
+      last:new Date().toISOString(),
+      nextReviewAt:
+        mastery>=35
+          ? 0
+          : scheduleReview
+            ? Date.now()+REVIEW_DELAY_MS
+            : old.nextReviewAt
+    };
 
-    /* count dipertahankan untuk kompatibilitas data versi lama. */
-    item.count=item.mastery;
-    all[key]=item;
     localStorage.setItem("kmr_learned",JSON.stringify(all));
-    return item.mastery;
+    return all[key];
   }
 
   function renderLearned(){
     const list=$("learnedList");
-    const entries=Object.entries(getLearned()).map(([key,value])=>{
-      const item=normalizeLearnedItem(value);
-      return {...item,key};
-    });
-
-    if(!entries.length){
-      list.innerHTML='<div class="empty">まだ単語が記録されていません。</div>';
-      return;
-    }
-
+    const learned=getLearned();
     const order=["N1","N2","N3","N4","N5"];
+
+    /* Gabungkan seluruh data bawaan + upload, lalu hilangkan duplikat kanji|reading. */
+    const catalogMap=new Map();
+    allData().forEach(q=>{
+      if(!q || !q.kanji || !q.reading)return;
+      const normalized={
+        kanji:String(q.kanji).trim(),
+        reading:String(q.reading).trim(),
+        meaning:String(q.meaning||"").trim(),
+        jlpt:/^N[1-5]$/i.test(String(q.jlpt||"")) ? String(q.jlpt).toUpperCase() : "N3"
+      };
+      catalogMap.set(learnedKey(normalized),normalized);
+    });
+    const catalog=[...catalogMap.values()];
+
     const html=[];
 
     order.forEach(level=>{
-      const items=entries
-        .filter(x=>x.jlpt===level)
+      const items=catalog
+        .filter(q=>q.jlpt===level)
+        .map(q=>{
+          const key=learnedKey(q);
+          const item=normalizeLearnedItem(learned[key],q);
+          return {...item,key};
+        })
         .sort((a,b)=>b.mastery-a.mastery || a.kanji.localeCompare(b.kanji,"ja"));
 
-      if(!items.length)return;
+      const memorizedCount=items.filter(x=>x.mastery>=35).length;
+      const totalCount=items.length;
 
       html.push(`
-        <section class="learned-level-group">
+        <section class="learned-level-group" data-level="${level}">
           <button class="learned-level-title" type="button">
-            <span class="folder-left"><span class="folder-icon">📁</span>${level}</span>
-            <span class="folder-arrow">▶</span>
+            <span class="folder-left">
+              <span class="folder-icon">📁</span>
+              <span class="folder-level-name">${level}</span>
+            </span>
+
+            <span class="folder-level-right">
+              <span class="folder-memorized">覚えた ${memorizedCount}</span>
+              <span class="folder-total">全 ${totalCount}語</span>
+              <span class="folder-arrow">▶</span>
+            </span>
           </button>
+
           <div class="learned-folder-content">
       `);
 
-      items.forEach(x=>{
-        const mastered=x.mastery>=35;
-        html.push(`
-          <div class="learned-item" data-learned-key="${escapeHtml(encodeURIComponent(x.key))}">
-            <div class="learned-kanji">${escapeHtml(x.kanji)}</div>
-            <div class="learned-meta">${escapeHtml(x.reading)} · ${escapeHtml(x.meaning)}</div>
-            <div class="learned-count${mastered?" mastered":""}">
-              ${mastered?"MASTERED":`${x.mastery}/35`}
+      if(!items.length){
+        html.push(`<div class="empty level-empty">このレベルの単語はまだありません。</div>`);
+      }else{
+        items.forEach(x=>{
+          const mastered=x.mastery>=35;
+          html.push(`
+            <div class="learned-item" data-learned-key="${escapeHtml(encodeURIComponent(x.key))}">
+              <div class="learned-kanji">${escapeHtml(x.kanji)}</div>
+              <div class="learned-meta">${escapeHtml(x.reading)} · ${escapeHtml(x.meaning)}</div>
+              <div class="learned-count${mastered?" mastered":""}">
+                ${mastered?"MASTERED":`${x.mastery}/35`}
+              </div>
             </div>
-          </div>
-        `);
-      });
+          `);
+        });
+      }
 
       html.push(`</div></section>`);
     });
@@ -4048,8 +4326,10 @@ button{cursor:pointer}
 
   function openLearnedDetail(key){
     const raw=getLearned()[key];
-    if(!raw)return;
-    const item=normalizeLearnedItem(raw);
+    const source=allData().find(q=>learnedKey(q)===key);
+    if(!raw && !source)return;
+
+    const item=normalizeLearnedItem(raw,source);
     const mastered=item.mastery>=35;
 
     $("learnedDetailLevel").textContent=item.jlpt||"-";
@@ -4343,14 +4623,59 @@ button{cursor:pointer}
     let pool=buildPool();
     if(!pool.length)pool=allData();
 
-    const scored=pool.map(q=>({q,mastery:getMastery(q),r:Math.random()}));
-    const unmastered=scored.filter(x=>x.mastery<35);
-    const source=unmastered.length ? unmastered : scored;
+    const learned=getLearned();
+    const now=Date.now();
 
-    source.sort((a,b)=>a.mastery-b.mastery || a.r-b.r);
-    const min=source[0]?.mastery ?? 0;
-    const band=source.filter(x=>x.mastery<=min+2).slice(0,8);
-    return (band[Math.floor(Math.random()*band.length)] || source[0]).q;
+    const scored=pool.map(q=>{
+      const item=normalizeLearnedItem(learned[learnedKey(q)],q);
+      return {
+        q,
+        mastery:item.mastery,
+        nextReviewAt:item.nextReviewAt || 0,
+        r:Math.random()
+      };
+    });
+
+    /*
+      Prioritas SRS:
+      1. 復習 yang sudah jatuh tempo (mastery 1-34)
+      2. kosakata baru / 0-35
+      3. progress yang belum jatuh tempo hanya dipakai bila tidak ada pilihan lain
+      MASTERED 35/35 tidak diprioritaskan lagi.
+    */
+    const dueReviews=scored
+      .filter(x=>x.mastery>0 && x.mastery<35 && x.nextReviewAt>0 && x.nextReviewAt<=now)
+      .sort((a,b)=>
+        a.nextReviewAt-b.nextReviewAt ||
+        a.mastery-b.mastery ||
+        a.r-b.r
+      );
+
+    if(dueReviews.length){
+      return dueReviews[0].q;
+    }
+
+    const newWords=scored
+      .filter(x=>x.mastery===0)
+      .sort((a,b)=>a.r-b.r);
+
+    if(newWords.length){
+      return newWords[0].q;
+    }
+
+    const unmastered=scored
+      .filter(x=>x.mastery>0 && x.mastery<35)
+      .sort((a,b)=>
+        a.nextReviewAt-b.nextReviewAt ||
+        a.mastery-b.mastery ||
+        a.r-b.r
+      );
+
+    if(unmastered.length){
+      return unmastered[0].q;
+    }
+
+    return scored.sort((a,b)=>a.r-b.r)[0]?.q;
   }
   function getEnemyEmoji(){
     if(state.bossActive) return BOSS_EMOJI;
@@ -4539,7 +4864,7 @@ button{cursor:pointer}
     state.combo++;
     state.attempted++;
     state.score+=100+(state.combo*20)+(Math.ceil(state.remaining)*12);
-    updateMastery(currentQ,+1);
+    updateMastery(currentQ,+1,{scheduleReview:true});
     updateCurrentMasteryDisplay();
     updateHUD();
     saveGameState();
