@@ -2709,33 +2709,54 @@ button{cursor:pointer}
 }
 
 
-/* ===== FINAL MOBILE TANGO + QUESTION CARD FIT ===== */
-@media(max-width:700px){
 
-  /* 単語: seluruh card mengikuti browser HP.
-     Hanya daftar kosakata di dalamnya yang boleh discroll. */
+/* ===== FINAL CLEAN MOBILE TANGO LAYOUT ===== */
+
+/* Desktop keeps the normal responsive card. */
+@media(min-width:701px){
+  #learnedScreen .menu-card{
+    width:min(700px,86vw) !important;
+    max-width:700px !important;
+  }
+
+  #learnedScreen .learned-level-title{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    min-height:36px !important;
+    padding:7px 11px !important;
+    border-radius:12px !important;
+    font-size:11px !important;
+    line-height:1.15 !important;
+  }
+}
+
+/* MOBILE: card 単語 mengikuti browser, tidak memenuhi seluruh layar.
+   Daftar kosakata saja yang boleh scroll. */
+@media(max-width:700px){
   body.kanji-data-scroll #learnedScreen{
     width:100vw !important;
     height:100dvh !important;
     min-height:100dvh !important;
     max-height:100dvh !important;
     padding:
-      max(4px,env(safe-area-inset-top))
-      4px
-      max(4px,env(safe-area-inset-bottom)) !important;
-    place-items:stretch !important;
+      max(12px,env(safe-area-inset-top))
+      0
+      max(12px,env(safe-area-inset-bottom)) !important;
+    display:grid !important;
+    place-items:center !important;
     overflow:hidden !important;
   }
 
   body.kanji-data-scroll #learnedScreen .menu-card{
-    width:100% !important;
-    height:100% !important;
-    max-width:none !important;
-    max-height:none !important;
+    width:min(90vw,430px) !important;
+    max-width:430px !important;
+    height:min(88dvh,720px) !important;
+    max-height:calc(100dvh - 24px) !important;
     min-height:0 !important;
-    margin:0 !important;
-    padding:10px 8px 8px !important;
-    border-radius:15px !important;
+    margin:0 auto !important;
+    padding:11px 10px 9px !important;
+    border-radius:16px !important;
     display:flex !important;
     flex-direction:column !important;
     overflow:hidden !important;
@@ -2743,8 +2764,9 @@ button{cursor:pointer}
 
   body.kanji-data-scroll #learnedScreen .section-title{
     flex:0 0 auto;
-    margin:0 0 7px !important;
-    font-size:clamp(19px,5.5vw,23px) !important;
+    margin:0 0 8px !important;
+    font-size:20px !important;
+    line-height:1.1 !important;
   }
 
   body.kanji-data-scroll #learnedScreen .learned-list{
@@ -2754,61 +2776,84 @@ button{cursor:pointer}
     max-height:none !important;
     overflow-y:auto !important;
     overflow-x:hidden !important;
-    padding:1px 2px 6px !important;
+    padding:1px 1px 5px !important;
   }
 
   body.kanji-data-scroll #learnedScreen .learned-level-group{
     width:100% !important;
+    margin:0 !important;
   }
 
+  /* N1-N5 memanjang mengikuti batas dalam card 単語,
+     tetapi dibuat lebih tipis/ramping. */
   body.kanji-data-scroll #learnedScreen .learned-level-title{
     width:100% !important;
-    min-height:43px !important;
-    padding:8px 11px !important;
-    border-radius:13px !important;
-    font-size:12px !important;
+    min-width:0 !important;
+    max-width:none !important;
+    min-height:34px !important;
+    height:34px !important;
+    padding:5px 9px !important;
+    border-radius:10px !important;
+    font-size:10.5px !important;
+    line-height:1 !important;
+    justify-content:space-between !important;
+    box-shadow:0 3px 0 rgba(96,157,211,.10) !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-left{
+    gap:5px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-icon{
+    font-size:13px !important;
+  }
+
+  body.kanji-data-scroll #learnedScreen .folder-arrow{
+    font-size:9px !important;
   }
 
   body.kanji-data-scroll #learnedScreen .learned-folder-content{
     width:100% !important;
+    margin-top:5px !important;
   }
 
   body.kanji-data-scroll #learnedScreen .learned-item{
     width:100% !important;
-    min-height:64px !important;
-    padding:9px 10px !important;
+    min-height:58px !important;
+    padding:8px 9px !important;
     gap:7px !important;
-    border-radius:14px !important;
+    border-radius:13px !important;
   }
 
   body.kanji-data-scroll #learnedScreen .learned-kanji{
-    font-size:clamp(20px,6vw,27px) !important;
-    line-height:1.12 !important;
+    font-size:clamp(19px,5.7vw,25px) !important;
+    line-height:1.1 !important;
   }
 
   body.kanji-data-scroll #learnedScreen .learned-meta{
-    font-size:clamp(10px,3.15vw,12px) !important;
-    line-height:1.32 !important;
+    font-size:clamp(10px,3vw,12px) !important;
+    line-height:1.28 !important;
     white-space:normal !important;
-    overflow-wrap:anywhere;
+  }
+
+  body.kanji-data-scroll #learnedScreen .learned-count{
+    font-size:9px !important;
   }
 
   body.kanji-data-scroll #learnedScreen .actions{
     flex:0 0 auto;
-    width:100%;
+    width:100% !important;
     margin-top:7px !important;
     gap:6px !important;
   }
 
   body.kanji-data-scroll #learnedScreen .actions button{
-    min-height:38px !important;
+    min-height:37px !important;
     padding:6px 8px !important;
-    font-size:11px !important;
+    font-size:10.5px !important;
   }
 
-
-  /* Kartu soal mobile dibuat lebih panjang dan lebih lega.
-     Isi: kanji + 習得度/SRS + 読み方は？ + input. */
+  /* Kartu soal mobile tetap panjang agar kanji / SRS / 読み方は？ terbaca. */
   body.mobile-game-active .question-card{
     left:50% !important;
     right:auto !important;
@@ -2824,7 +2869,6 @@ button{cursor:pointer}
   }
 
   body.mobile-game-active .kanji{
-    flex:0 0 auto;
     font-size:clamp(36px,10vw,44px) !important;
     line-height:1.05 !important;
     margin:0 0 2px !important;
@@ -2832,47 +2876,39 @@ button{cursor:pointer}
   }
 
   body.mobile-game-active .mastery-info{
-    flex:0 0 auto;
     margin:2px auto 4px !important;
     padding:3px 9px !important;
-    min-height:19px;
+    min-height:19px !important;
     font-size:10px !important;
     line-height:1.15 !important;
   }
 
   body.mobile-game-active .question-note{
-    flex:0 0 auto;
     margin:0 0 5px !important;
-    min-height:15px;
+    min-height:15px !important;
     font-size:11px !important;
     line-height:1.25 !important;
     font-weight:800;
   }
 
   body.mobile-game-active .answer-shell{
-    flex:0 0 auto;
     width:100% !important;
     min-height:37px !important;
     border-radius:10px !important;
   }
 
   body.mobile-game-active #answer{
-    min-width:0 !important;
     padding:6px 9px !important;
     font-size:16px !important;
     line-height:1.3 !important;
   }
 
   body.mobile-game-active .timer{
-    flex:0 0 auto;
-    width:100%;
+    width:100% !important;
     height:5px !important;
     margin-top:5px !important;
   }
 
-
-  /* Saat keyboard terbuka tetap lebih panjang dari versi sebelumnya,
-     tetapi masih muat di visible viewport. */
   body.mobile-game-active.keyboard-open .question-card{
     width:calc(100% - 2px) !important;
     min-height:122px !important;
@@ -2882,20 +2918,18 @@ button{cursor:pointer}
 
   body.mobile-game-active.keyboard-open .kanji{
     font-size:clamp(31px,9vw,38px) !important;
-    line-height:1.03 !important;
-    margin-bottom:1px !important;
   }
 
   body.mobile-game-active.keyboard-open .mastery-info{
     margin:1px auto 3px !important;
     padding:2px 8px !important;
-    min-height:17px;
+    min-height:17px !important;
     font-size:9px !important;
   }
 
   body.mobile-game-active.keyboard-open .question-note{
     margin:0 0 4px !important;
-    min-height:13px;
+    min-height:13px !important;
     font-size:10px !important;
   }
 
@@ -2903,17 +2937,6 @@ button{cursor:pointer}
     min-height:34px !important;
   }
 
-  body.mobile-game-active.keyboard-open #answer{
-    padding:5px 8px !important;
-    font-size:16px !important;
-  }
-
-  body.mobile-game-active.keyboard-open .timer{
-    height:4px !important;
-    margin-top:4px !important;
-  }
-
-  /* Beri ruang sedikit lebih banyak untuk kartu soal yang memanjang. */
   body.mobile-game-active .monster-wrap{
     top:39% !important;
   }
@@ -2921,217 +2944,19 @@ button{cursor:pointer}
   body.mobile-game-active.keyboard-open .monster-wrap{
     top:36% !important;
   }
-
-  body.mobile-game-active.keyboard-open .emoji-stage{
-    width:106px !important;
-    height:76px !important;
-  }
-
-  body.mobile-game-active.keyboard-open .enemy-emoji{
-    font-size:58px !important;
-  }
 }
 
-/* HP sangat pendek: tetap prioritaskan keterbacaan kartu soal. */
-@media(max-width:700px) and (max-height:430px){
-  body.mobile-game-active .question-card{
-    min-height:112px !important;
-    padding:5px 8px !important;
-  }
-
-  body.mobile-game-active .kanji{
-    font-size:30px !important;
-  }
-
-  body.mobile-game-active .mastery-info{
-    font-size:8px !important;
-    min-height:15px !important;
-  }
-
-  body.mobile-game-active .question-note{
-    font-size:9px !important;
-    min-height:11px !important;
-  }
-
-  body.mobile-game-active .answer-shell{
-    min-height:32px !important;
-  }
-}
-
-
-/* ===== FINAL MOBILE TANGO FOLDER SIZE RESET ===== */
-@media(max-width:700px){
-  /* Folder level N1-N5 kembali ke ukuran normal seperti sebelumnya */
-  body.kanji-data-scroll #learnedScreen .learned-level-title{
-    width:100% !important;
-    min-height:auto !important;
-    padding:7px 10px !important;
-    border-radius:12px !important;
-    font-size:11px !important;
-    line-height:1.2 !important;
-    box-shadow:0 3px 0 rgba(96,157,211,.11) !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .folder-left{
-    gap:5px !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .folder-icon{
-    font-size:14px !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .folder-arrow{
-    font-size:10px !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .learned-level-group{
-    margin:0 !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .learned-folder-content{
-    margin-top:5px !important;
-  }
-}
-
-
-
-/* ===== FINAL TANGO PROPORTIONAL LAYOUT ===== */
-
-/* Card 単語 proporsional di desktop */
-#learnedScreen .menu-card{
-  width:min(760px,86vw) !important;
-  max-width:760px !important;
-}
-
-/* Folder level: tidak sekecil isi teks, tidak selebar card penuh */
-#learnedScreen .learned-level-title{
-  width:min(260px,42%) !important;
-  min-width:170px !important;
-  max-width:260px !important;
-  justify-content:space-between !important;
-  gap:10px !important;
-  padding:9px 12px !important;
-  border-radius:14px !important;
-  font-size:12px !important;
-}
-
-#learnedScreen .learned-level-group{
-  width:100% !important;
-}
-
-#learnedScreen .learned-folder-content{
-  width:100% !important;
-  margin-top:6px !important;
-}
-
-/* Daftar kosakata tetap proporsional mengikuti card */
-#learnedScreen .learned-item{
-  width:100% !important;
-}
-
-/* Mobile */
-@media(max-width:700px){
-  body.kanji-data-scroll #learnedScreen{
-    padding:
-      max(5px,env(safe-area-inset-top))
-      7px
-      max(5px,env(safe-area-inset-bottom)) !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .menu-card{
-    width:min(94vw,520px) !important;
-    max-width:520px !important;
-    height:calc(100dvh - 10px) !important;
-    max-height:calc(100dvh - 10px) !important;
-    margin:0 auto !important;
-    padding:11px 10px 9px !important;
-    border-radius:16px !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .learned-level-title{
-    width:min(210px,58%) !important;
-    min-width:155px !important;
-    max-width:210px !important;
-    padding:8px 10px !important;
-    border-radius:12px !important;
-    font-size:11px !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .learned-list{
-    width:100% !important;
-    padding-right:2px !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .learned-item{
-    width:100% !important;
-    min-height:60px !important;
-    padding:8px 9px !important;
-  }
-}
-
-/* HP sempit */
 @media(max-width:390px){
   body.kanji-data-scroll #learnedScreen .menu-card{
-    width:95vw !important;
+    width:92vw !important;
+    height:min(90dvh,680px) !important;
   }
 
   body.kanji-data-scroll #learnedScreen .learned-level-title{
-    width:min(190px,62%) !important;
-    min-width:145px !important;
-    max-width:190px !important;
-  }
-}
-
-
-/* ===== FINAL TANGO FOLDER ALIGNMENT ===== */
-
-/* N1-N5 mengikuti lebar area dalam card 単語, tetapi dibuat lebih ramping */
-#learnedScreen .learned-level-title{
-  width:100% !important;
-  min-width:0 !important;
-  max-width:none !important;
-  min-height:0 !important;
-  padding:7px 11px !important;
-  border-radius:12px !important;
-  font-size:11px !important;
-  line-height:1.15 !important;
-  justify-content:space-between !important;
-}
-
-#learnedScreen .learned-level-group{
-  width:100% !important;
-}
-
-#learnedScreen .learned-folder-content{
-  width:100% !important;
-  margin-top:5px !important;
-}
-
-#learnedScreen .folder-icon{
-  font-size:14px !important;
-}
-
-#learnedScreen .folder-arrow{
-  font-size:10px !important;
-}
-
-@media(max-width:700px){
-  body.kanji-data-scroll #learnedScreen .learned-level-title{
-    width:100% !important;
-    min-width:0 !important;
-    max-width:none !important;
-    padding:6px 9px !important;
-    border-radius:11px !important;
-    font-size:10.5px !important;
-    line-height:1.12 !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .folder-icon{
-    font-size:13px !important;
-  }
-
-  body.kanji-data-scroll #learnedScreen .folder-arrow{
-    font-size:9px !important;
+    height:33px !important;
+    min-height:33px !important;
+    padding:5px 8px !important;
+    font-size:10px !important;
   }
 }
 
